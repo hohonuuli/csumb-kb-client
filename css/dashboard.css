@@ -30,6 +30,7 @@ body {
 .navbar-brand{
   padding: 4px 15px;
 }
+
 /*
  * Sidebar
  */
@@ -37,6 +38,9 @@ body {
 /* Hide for mobile, show later */
 .sidebar {
   display: none;
+}
+ul.tree {
+    display: none;
 }
 @media (min-width: 768px) {
   .sidebar {
