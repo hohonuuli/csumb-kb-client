@@ -24,7 +24,12 @@ body {
 .navbar-fixed-top {
   border: 0;
 }
-
+.navbar-inverse{
+  background-color: #002B46;
+}
+.navbar-brand{
+  padding: 4px 15px;
+}
 /*
  * Sidebar
  */
