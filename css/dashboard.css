@@ -28,12 +28,14 @@ body {
 .navbar-inverse {
   background-color: #002B46;
 }
+
 .navbar-brand {
   padding: 4px 15px;
   background-color: white;
   margin: 5px 0px 5px 0px;
   border-radius: 10px;
 }
+
 .navbar-brand>img {
   width: 200px;
   padding-top: 8px;
@@ -103,6 +105,9 @@ ul.tree {
   background-color: #428bca;
 }
 
+#view-toggler{
+  display: inline-block;
+}
 
 /*
  * Main content
