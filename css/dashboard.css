@@ -126,7 +126,9 @@ ul.tree {
   margin-top: 0;
 }
 
-
+.alert{
+  display: none;
+}
 /*
  * Placeholder dashboard ideas
  */

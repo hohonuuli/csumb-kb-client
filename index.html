@@ -21,7 +21,6 @@
 
   <!-- Boiler plate from Bootstrap example -->
   <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -39,9 +38,10 @@
             <li><a href="#">Login</a></li>
             <li><a href="#">Profile</a></li>
           </ul>
-          <form class="navbar-form navbar-left">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
+          <div class="navbar-form navbar-left">
+            <input id="searchInput" type="text" class="form-control" placeholder="Search...">
+            <button id="searchButton" class="btn btn-primary mb-2" style="color: #FFFFFF"><span class="glyphicon glyphicon-search"></span></button>
+          </div>
         </div>
       </div>
     </nav>
@@ -89,6 +89,10 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong id="alertError">Warning!</strong> <span id="alertText"></span>
+          </div>
           <h1 class="page-header">Dashboard</h1>
 
           <div class="row placeholders">
@@ -114,8 +118,9 @@
             </div>
           </div>
 
-          <h2 class="sub-header">Section title</h2>
-          <div class="table-responsive">
+          <h2 class="sub-header">Object (root)</h2>
+          <div id="objectConcept"></div>
+          <!-- <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -241,7 +246,7 @@
                 </tr>
               </tbody>
             </table>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
