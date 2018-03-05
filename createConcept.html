@@ -61,20 +61,23 @@
           <h1 class="page-header">Create Concept</h1>
 
           <!--test form-->
+        <form id="create-form">
           <div class="sub-header" align="center">
             <div class="form-group">
               <label for="usr">Concept Name:</label>
-              <input type="text" class="form-control" id="usr">
+              <input type="text" class="form-control" id="c-name">
               <label for="pwd">Author:</label>
-              <input type="password" class="form-control" id="pwd">
+              <input type="password" class="form-control" id="c-author">
               <label for="comment">Comment:</label>
-              <textarea class="form-control" rows="3" id="comment"></textarea>
+              <textarea class="form-control" rows="3" id="c-comment"></textarea>
             </div>
-            <label class="checkbox-inline"><input type="checkbox" value="">Primary</label>
-            <label class="checkbox-inline"><input type="checkbox" value="">Common</label>
-            <label class="checkbox-inline"><input type="checkbox" value="">Synonym</label>
-            <label class="checkbox-inline"><input type="checkbox" value="">Former</label>
+            <label class="checkbox-inline">Type:      <input type="radio" value=""> Primary</label>
+            <label class="checkbox-inline"><input type="radio" value=""> Common</label>
+            <label class="checkbox-inline"><input type="radio" value=""> Synonym</label>
+            <label class="checkbox-inline"><input type="radio" value=""> Former</label>
+            <br><button type="button" id="post-btn">Submit</button>
           </div>
+        </form>
           <!-- end -->
 
 
