@@ -13,13 +13,12 @@ $(function() {
           // synonym:$("#c-synonym").val()
       }
 
-      var name = $("#c-name").val()
       $.ajax({
-          url: 'http://localhost:4567/createConcept/' + name,
+          url: 'http://localhost:4567/createConcept/' + concept.name,
           type: 'post',
           dataType: 'json',
           success: function (data) {
-              console.log(data.msg)
+              console.log(data)
           },
           error: function(status,error){
               console.log(error.msg)
@@ -28,6 +27,27 @@ $(function() {
       });
 
   });
+
+  //test delete
+  $("#del-btn").click(function(){
+      var concept = {
+          name: $("#c-name").val(),
+      }
+      $.ajax({
+          url: 'http://localhost:4567/deleteConcept/' + concept.name,
+          type: 'delete',
+          dataType: 'json',
+          success: function (data) {
+              console.log(data)
+          },
+          error: function(status,error){
+              console.log(error.msg)
+          },
+          data: concept
+      });
+
+  });
+
 
   $('label.tree-toggle').click(function () {
         $(this).parent().children('ul.tree').toggle(250); //show and hide children
