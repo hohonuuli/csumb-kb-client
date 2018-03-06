@@ -1,6 +1,7 @@
 var treeData = null;
 
 $(function() {
+  
   //When document is loaded
 
   //Gets all concepts
@@ -50,6 +51,49 @@ $(function() {
       $(this).parent().parent().children('ul.tree').toggle(250); //show and hide children
       $(this).toggleClass('glyphicon glyphicon-chevron-right');  //switch icons
       $(this).toggleClass('glyphicon glyphicon-chevron-down');
+  });
+  
+  $("#post-btn").click(function(){
+      var concept = {
+          name: $("#c-name").val(),
+          //eventually will include author and synonym
+          // author:$("#c-author").val(),
+          // synonym:$("#c-synonym").val()
+      }
+
+      $.ajax({
+          url: 'http://localhost:4567/createConcept/' + concept.name,
+          type: 'post',
+          dataType: 'json',
+          success: function (data) {
+              console.log(data)
+          },
+          error: function(status,error){
+              console.log(error.msg)
+          },
+          data: concept
+      });
+
+  });
+
+  //test delete
+  $("#del-btn").click(function(){
+      var concept = {
+          name: $("#c-name").val(),
+      }
+      $.ajax({
+          url: 'http://localhost:4567/deleteConcept/' + concept.name,
+          type: 'delete',
+          dataType: 'json',
+          success: function (data) {
+              console.log(data)
+          },
+          error: function(status,error){
+              console.log(error.msg)
+          },
+          data: concept
+      });
+
   });
 });
 
