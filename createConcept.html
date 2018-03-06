@@ -57,12 +57,20 @@
 
 
         </div>
+
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Create Concept</h1>
 
           <!--test form-->
         <form id="create-form">
           <div class="sub-header" align="center">
+            
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong id="alert-error"></strong> <span id="alert-text"></span>
+            </div>
+
+
             <div class="form-group">
               <label for="usr">Concept Name:</label>
               <input type="text" class="form-control" id="c-name">
@@ -81,6 +89,8 @@
             <button type="button" class="btn btn-warning" id="del-btn">Delete</button>
           </div>
         </form>
+
+
           <!-- end -->
 
 

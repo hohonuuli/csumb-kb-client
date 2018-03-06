@@ -1,7 +1,7 @@
 var treeData = null;
 
 $(function() {
-  
+
   //When document is loaded
 
   //Gets all concepts
@@ -52,7 +52,7 @@ $(function() {
       $(this).toggleClass('glyphicon glyphicon-chevron-right');  //switch icons
       $(this).toggleClass('glyphicon glyphicon-chevron-down');
   });
-  
+
   $("#post-btn").click(function(){
       var concept = {
           name: $("#c-name").val(),
@@ -67,6 +67,9 @@ $(function() {
           dataType: 'json',
           success: function (data) {
               console.log(data)
+              $("#alert-text").html("Concept created!");
+              $(".alert").show();
+              $(".alert").delay(3200).fadeOut(300);
           },
           error: function(status,error){
               console.log(error.msg)
@@ -86,7 +89,9 @@ $(function() {
           type: 'delete',
           dataType: 'json',
           success: function (data) {
-              console.log(data)
+            $("#alert-text").html("Concept has been deleted.");
+            $(".alert").show();
+            $(".alert").delay(3200).fadeOut(300);
           },
           error: function(status,error){
               console.log(error.msg)
