@@ -25,6 +25,42 @@ body {
   border: 0;
 }
 
+.navbar-inverse {
+  background-color: #002B46;
+}
+
+.navbar-brand {
+  padding: 4px 15px;
+  background-color: white;
+  margin: 5px 0px 5px 0px;
+  border-radius: 10px;
+}
+
+.navbar-brand>img {
+  width: 200px;
+  padding-top: 8px;
+}
+@media (min-width: 768px) {
+  .navbar-right {
+      padding-top: 5px;
+  }
+  .navbar-left {
+    padding-top: 5px;
+  }
+}
+@media (max-width: 768px) {
+  .navbar-brand {
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+    width: 60%;
+  }
+  .navbar-brand>img{
+    display: block;
+    margin:  0 auto;
+  }
+}
+
 /*
  * Sidebar
  */
@@ -32,6 +68,9 @@ body {
 /* Hide for mobile, show later */
 .sidebar {
   display: none;
+}
+ul.tree {
+    display: none;
 }
 @media (min-width: 768px) {
   .sidebar {
@@ -66,6 +105,9 @@ body {
   background-color: #428bca;
 }
 
+#view-toggler{
+  display: inline-block;
+}
 
 /*
  * Main content
@@ -84,7 +126,9 @@ body {
   margin-top: 0;
 }
 
-
+.alert{
+  display: none;
+}
 /*
  * Placeholder dashboard ideas
  */
