@@ -12,6 +12,11 @@ $(function() {
     $("#objectConcept").html(JSON.stringify(data));
   });
 
+  //Trying get metadata on object
+  $.get("http://localhost:4567/getMetadata/object", function(data, status){
+    console.log(data);
+  });
+
   //Appends first level of tree
   $.get("http://localhost:8083/kb/v1/phylogeny/down/object", function(data, status){
     treeData = data;
@@ -57,7 +62,8 @@ $("#searchButton").click(function(){
 $("#searchInput").keypress(function(e) {
     if(e.which == 13) {
         getSearchResult();
-        //Removes focus
+
+        //Removes focus on input
         $(this).blur();
     }
 });
