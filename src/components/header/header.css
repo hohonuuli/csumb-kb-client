@@ -1,0 +1,41 @@
+.navbar-fixed-top {
+  border: 0;
+}
+
+.navbar-default{
+  background-color: #002B46;
+}
+.navbar-brand {
+  padding: 4px 15px;
+  background-color: #FFFFFF;
+  margin: 5px 0px 5px 0px;
+  border-radius: 10px;
+}
+
+.navbar-brand>img {
+  width: 200px;
+  padding-top: 8px;
+}
+.navbar{
+  border: none;
+}
+@media (min-width: 768px) {
+  .navbar-right {
+      padding-top: 5px;
+  }
+  .navbar-left {
+    padding-top: 5px;
+  }
+}
+@media (max-width: 768px) {
+  .navbar-brand {
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+    width: 60%;
+  }
+  .navbar-brand>img{
+    display: block;
+    margin:  0 auto;
+  }
+}
