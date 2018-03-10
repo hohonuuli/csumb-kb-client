@@ -1,22 +1,49 @@
 import React, { Component } from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
 import TreeView from '../../components/treeView';
+import AlertComp from '../../components/common/alertComp';
+import { setCurrentObject } from '../../actions/index';
 import './mainView.css';
 
 class MainView extends Component {
+  componentWillMount(){
+    fetch("http://localhost:8083/kb/v1/concept/object")
+    .then(res => res.json())
+    .then(
+      (result) => {
+        this.props.setCurrentObject(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
   render() {
     return (
       <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <div className="alert alert-danger alert-dismissible" role="alert">
-          <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <strong id="alertError">Warning!</strong> <span id="alertText"></span>
-        </div>
+        <AlertComp />
         <h1 className="page-header">Dashboard</h1>
 
         <h2 className="sub-header">Object (root)</h2>
-        <div id="objectConcept"></div>
+        <div id="objectConcept">{JSON.stringify(this.props.currentObject)}</div>
       </div>
     );
   }
 }
+// Get apps state and pass it as props to currentObject
+//      > whenever state changes, the currentObject will automatically re-render
+function mapStateToProps(state) {
+    return {
+        currentObject: state.currentObject
+    };
+}
 
-export default MainView;
+// Get actions and pass them as props to to currentObject
+//      > now UserList has this.props.currentObject
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({setCurrentObject: setCurrentObject}, dispatch);
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(MainView);

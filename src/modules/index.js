@@ -3,7 +3,9 @@
 
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import currentObjectReducer from './currentObject';
 
 export default combineReducers({
   router: routerReducer,
+  currentObject: currentObjectReducer,
 });

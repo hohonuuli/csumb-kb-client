@@ -7,6 +7,10 @@ class SearchBar extends Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.updateInputValue = this.updateInputValue.bind(this);
     this.onClickButton = this.onClickButton.bind(this);
+    this.state = {
+      inputField : null,
+      result: null,
+    }
   }
   render() {
     return (
@@ -19,14 +23,45 @@ class SearchBar extends Component {
 
   handleKeyPress(e) {
     if (e.key === 'Enter') {
-      console.log(this.state.inputField);
+      if(this.state.inputField != null){
+        var urlString = "http://localhost:8083/kb/v1/concept/" + this.state.inputField;
+        fetch(urlString)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            console.log(result);
+          },
+          (error) => {
+            console.log(error);
+          }
+        )
+      }else{
+        console.log("empty");
+      }
     }
   }
   updateInputValue(e){
     this.setState({inputField: e.target.value});
   }
   onClickButton(){
-    console.log(this.state.inputField);
+    if(this.state.inputField != null){
+      var urlString = "http://localhost:8083/kb/v1/concept/" + this.state.inputField;
+      fetch(urlString)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }else{
+      console.log("empty");
+    }
+  }
+  searchInput(){
+
   }
 }
 
