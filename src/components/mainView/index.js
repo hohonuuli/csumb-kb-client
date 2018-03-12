@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import TreeView from '../../components/treeView';
 import AlertComp from '../../components/common/alertComp';
 import { setCurrentObject } from '../../actions/index';
 import './mainView.css';
@@ -41,7 +40,7 @@ function mapStateToProps(state) {
 }
 
 // Get actions and pass them as props to to currentObject
-//      > now UserList has this.props.currentObject
+//      > now currentObject has this.props.currentObject
 function matchDispatchToProps(dispatch){
     return bindActionCreators({setCurrentObject: setCurrentObject}, dispatch);
 }

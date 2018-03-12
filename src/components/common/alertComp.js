@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Alert, Button} from 'react-bootstrap';
+import {Alert} from 'react-bootstrap';
 
 class AlertComp extends Component {
   constructor(props, context) {
@@ -12,7 +12,7 @@ class AlertComp extends Component {
     this.handleDismiss = this.handleDismiss.bind(this);
     this.handleShow = this.handleShow.bind(this);
   }
-  
+
   handleDismiss() {
     this.setState({ show: false });
   }

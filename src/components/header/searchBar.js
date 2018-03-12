@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import { setCurrentObject } from '../../actions/index';
+import Suggest from './suggest';
 import './header.css';
 
 class SearchBar extends Component {
@@ -9,7 +14,6 @@ class SearchBar extends Component {
     this.onClickButton = this.onClickButton.bind(this);
     this.state = {
       inputField : null,
-      result: null,
     }
   }
   render() {
@@ -29,7 +33,7 @@ class SearchBar extends Component {
         .then(res => res.json())
         .then(
           (result) => {
-            console.log(result);
+            this.props.setCurrentObject(result);
           },
           (error) => {
             console.log(error);
@@ -50,7 +54,7 @@ class SearchBar extends Component {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result);
+          this.props.setCurrentObject(result);
         },
         (error) => {
           console.log(error);
@@ -60,9 +64,19 @@ class SearchBar extends Component {
       console.log("empty");
     }
   }
-  searchInput(){
-
-  }
 }
 
-export default SearchBar;
+// Get apps state and pass it as props to currentObject
+// whenever state changes, the currentObject will automatically re-render
+function mapStateToProps(state) {
+    return {
+        currentObject: state.currentObject
+    };
+}
+
+// Get actions and pass them as props to to currentObject
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({setCurrentObject: setCurrentObject}, dispatch);
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(SearchBar);
