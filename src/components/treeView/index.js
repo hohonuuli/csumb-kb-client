@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
-import {Treebeard} from 'react-treebeard';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import { setCurrentObject } from '../../actions/index';
+import {Treebeard, decorators} from 'react-treebeard';
 import './treeView.css';
+import style from './treeViewStyle';
+
+decorators.Header = ({style, node}) => {
+    return (
+        <div style={style.base}>
+            <div style={style.title}>
+                {node.name}
+            </div>
+        </div>
+    );
+};
 
 class TreeView extends Component {
 
@@ -14,12 +25,14 @@ class TreeView extends Component {
           treeData: {},
         };
         this.onToggle = this.onToggle.bind(this);
-    }
+  }
+
   onToggle(node, toggled){
         if(this.state.cursor){this.state.cursor.active = false;}
         node.active = true;
         if(node.children){ node.toggled = toggled; }
         this.setState({ cursor: node });
+
         var nodeName = encodeURIComponent((node.name).trim());
         fetch("http://localhost:8083/kb/v1/concept/" + nodeName)
         .then(res => res.json())
@@ -54,6 +67,8 @@ class TreeView extends Component {
             <Treebeard
                 data={this.state.treeData}
                 onToggle={this.onToggle}
+                style={style}
+                decorators={decorators}
             />
           </ul>
         </ul>
