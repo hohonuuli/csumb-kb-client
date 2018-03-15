@@ -1,8 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-// import Home from '../home';
-import Dashboard from '../dashboard';
+
 import Header from '../../components/header';
+import Dashboard from '../dashboard';
+import Login from '../login';
+import Profile from '../profile';
 
 const App = () => (
   <div>
@@ -12,8 +14,8 @@ const App = () => (
 
     <main>
       <Route exact path="/" component={Dashboard} />
-      <Route exact path="/login" component={Dashboard}/>
-      <Route exact path="/profile" component={Dashboard}/>
+      <Route exact path="/login" component={Login}/>
+      <Route exact path="/profile" component={Profile}/>
     </main>
   </div>
 );
