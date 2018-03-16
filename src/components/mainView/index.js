@@ -6,6 +6,8 @@ import AlertComp from '../../components/common/alertComp';
 import { setCurrentObject } from '../../actions/index';
 import './mainView.css';
 
+import ControlledTabs from '../tabView/tab';
+
 class MainView extends Component {
   componentWillMount(){
     fetch("http://localhost:8083/kb/v1/concept/object")
@@ -26,8 +28,10 @@ class MainView extends Component {
         <h1 className="page-header">Dashboard</h1>
 
         <h2 className="sub-header">Object (root)</h2>
-        <div id="objectConcept">{JSON.stringify(this.props.currentObject)}</div>
+        <div id="objectConcept"></div>
+        <ControlledTabs />
       </div>
+
     );
   }
 }
