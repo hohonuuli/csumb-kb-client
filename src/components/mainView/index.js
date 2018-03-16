@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import { Button } from 'react-bootstrap';
 
 import AlertComp from '../../components/common/alertComp';
 import { setCurrentObject } from '../../actions/index';
@@ -26,6 +27,10 @@ class MainView extends Component {
       <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <AlertComp />
         <h1 className="page-header">Dashboard</h1>
+        <Button className="pull-right" bsStyle="primary">Update</Button>
+        <Button className="pull-right" bsStyle="primary">Add</Button>
+        <Button className="pull-right" bsStyle="primary">Delete</Button>
+
 
         <h2 className="sub-header">Object (root)</h2>
         <div id="objectConcept"></div>
