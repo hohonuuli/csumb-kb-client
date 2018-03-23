@@ -46,6 +46,7 @@ class ControlledTabs extends Component {
           {JSON.stringify(this.props.currentObject)}
         </Tab>
       </Tabs>
+
     );
   }
 }
