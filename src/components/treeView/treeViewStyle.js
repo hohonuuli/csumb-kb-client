@@ -7,7 +7,7 @@ export default {
             padding: 0,
             color: '#000000',
             fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif',
-            fontSize: '16px'
+            fontSize: '13px'
         },
         node: {
             base: {
@@ -38,8 +38,8 @@ export default {
                     margin: '-7px 0 0 -7px',
                     height: '14px'
                 },
-                height: 14,
-                width: 14,
+                height: 10,
+                width: 10,
                 arrow: {
                     fill: '#000000',
                     strokeWidth: 0
