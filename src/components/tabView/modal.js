@@ -5,8 +5,7 @@ import {connect} from 'react-redux';
 import { setCurrentObject } from '../../actions/index';
 
 import { Popover, Modal, Button } from 'react-bootstrap';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
-import FieldGroup from '../tabView/createConcept';
+import FormExample from './createConcept';
 
 
 class ModalC extends React.Component {
@@ -15,10 +14,45 @@ class ModalC extends React.Component {
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.onFormChange = this.onFormChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.conceptName = '';
+    // this.conceptName = '';
 
     this.state = {
       show: false
     };
+
+
+  }
+
+  handleSubmit() {
+    console.log('sending.....', this.conceptName);
+    fetch('http://localhost:4567/createConcept/' + this.conceptName, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+      body: JSON.stringify({
+        name: this.conceptName,
+        role: "Admin",
+        userName: "Brian",
+      }),
+
+    })
+    .then(function(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }).then(function(response) {
+        console.log("success");
+    }).catch(function(error) {
+        console.log(error);
+    });
+
   }
 
   handleClose() {
@@ -29,17 +63,15 @@ class ModalC extends React.Component {
     this.setState({ show: true });
   }
 
-  render() {
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-    const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
+  onFormChange(e) {
+    this.conceptName = e.target.value;
 
+  }
+
+  render() {
     return (
       <div>
-        <Button bsStyle="primary" className="pull-right" bsSize="primary" onClick={this.handleShow}>
+        <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
           <p>Add new concept</p>
         </Button>
 
@@ -48,10 +80,11 @@ class ModalC extends React.Component {
             <Modal.Title>New concept</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FieldGroup />
+            <FormExample onFormChange={this.onFormChange} />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Close</Button>
+            <Button bsStyle="primary" onClick={this.handleSubmit}>Submit</Button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -59,18 +92,4 @@ class ModalC extends React.Component {
   }
 }
 
-// Get apps state and pass it as props to currentObject
-//      > whenever state changes, the currentObject will automatically re-render
-function mapStateToProps(state) {
-    return {
-        currentObject: state.currentObject
-    };
-}
-
-// Get actions and pass them as props to to currentObject
-//      > now currentObject has this.props.currentObject
-function matchDispatchToProps(dispatch){
-    return bindActionCreators({setCurrentObject: setCurrentObject}, dispatch);
-}
-
-export default connect(mapStateToProps, matchDispatchToProps)(ModalC);
+export default ModalC;

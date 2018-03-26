@@ -8,8 +8,6 @@ import { setCurrentObject } from '../../actions/index';
 import './mainView.css';
 
 import ControlledTabs from '../tabView/tab';
-import formInstance from '../tabView/createConcept';
-import FieldGroup from '../tabView/createConcept';
 import ModalC from '../tabView/modal';
 
 class MainView extends Component {
@@ -39,8 +37,7 @@ class MainView extends Component {
         <Button className="pull-right" bsStyle="primary">Add</Button>
         <Button className="pull-right" bsStyle="primary">Delete</Button>
 
-    
-        <h2 className="sub-header">Object (root)</h2>
+        <h2 className="sub-header">Object (root) </h2>
         <div id="objectConcept"></div>
         <ControlledTabs />
         <ModalC />
