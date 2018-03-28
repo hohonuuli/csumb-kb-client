@@ -7,15 +7,6 @@ import {Treebeard, decorators} from 'react-treebeard';
 import './treeView.css';
 import style from './treeViewStyle';
 
-decorators.Header = ({style, node}) => {
-    return (
-        <div style={style.base}>
-            <div style={style.title}>
-                {node.name}
-            </div>
-        </div>
-    );
-};
 
 class TreeView extends Component {
 
@@ -61,7 +52,7 @@ class TreeView extends Component {
   render() {
 
     return (
-      <div className="col-sm-3 col-md-2 sidebar">
+      <div className="col-sm-3 col-md-3 sidebar">
         <ul className="nav nav-sidebar">
           <ul className="nav nav-list">
             <Treebeard
@@ -89,6 +80,31 @@ function mapStateToProps(state) {
 //      > now currentObject has this.props.currentObject
 function matchDispatchToProps(dispatch){
     return bindActionCreators({setCurrentObject: setCurrentObject}, dispatch);
+}
+
+decorators.Header = ({style, node}) => {
+    return (
+        <div style={style.base}>
+            <div style={style.title}>
+                {node.name}
+            </div>
+        </div>
+    );
+};
+decorators.Toggle = ({style}) =>{
+  const {height, width} = style;
+    const midHeight = height * 0.5;
+    const points = `0,0 0,${height} ${width},${midHeight}`;
+
+    return (
+        <div style={style.base}>
+            <div style={style.wrapper}>
+                <svg height={height} width={width}>
+                    <polygon points={points} style={style.arrow}/>
+                </svg>
+            </div>
+        </div>
+    );
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(TreeView);
