@@ -24,20 +24,46 @@ class MainView extends Component {
     )
   }
 
-  buttonClicked() {
-      console.log('Button was clicked!')
+  handleDelete = () => { //hard coding for now until I can set delete to 'currentObject'
+  //http://localhost:4567/deleteConcept/hadal?userName=Brian
+      console.log('Delete button was clicked!')
+      fetch('http://localhost:4567/deleteConcept/' + this.props.currentObject.currentObject.name, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+        body: JSON.stringify({
+          name: this.props.currentObject,
+          //user name for testing
+          role: "Admin",
+          userName: "Brian",
+        }),
+
+      })
+      .then(function(response) {
+          const res = response.json();
+          res.then((json) => console.log(json) )
+          console.log(response);
+
+
+      }).catch(function(error) {
+          console.log(error);
+      });
+
   }
 
   render() {
+    console.log(this.props.currentObject.currentObject)
     return (
       <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <AlertComp />
         <h1 className="page-header">Dashboard</h1>
-        <Button className="pull-right" bsStyle="primary" onClick={this.buttonClicked}>Update</Button>
+        <Button className="pull-right" bsStyle="primary">Update</Button>
         <Button className="pull-right" bsStyle="primary">Add</Button>
-        <Button className="pull-right" bsStyle="primary">Delete</Button>
+        <Button className="pull-right" bsStyle="primary" onClick={this.handleDelete}>Delete</Button>
 
-        <h2 className="sub-header">Object (root) </h2>
+        <h2 className="sub-header">{this.props.currentObject.currentObject.name || "Object (root)"}</h2>
         <div id="objectConcept"></div>
         <ControlledTabs />
         <ModalC />

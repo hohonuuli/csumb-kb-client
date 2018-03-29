@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import React from 'react';
 
-import { setCurrentObject } from '../../actions/index';
-
-import { Popover, Modal, Button } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import FormExample from './createConcept';
 
 
@@ -14,16 +10,19 @@ class ModalC extends React.Component {
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.onFormChange = this.onFormChange.bind(this);
+    this.setName = this.setName.bind(this);
+    this.setAuthor = this.setAuthor.bind(this);
+    this.setType =this.setType.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.conceptName = '';
-    // this.conceptName = '';
+    this.author = '';
+    this.type = '';
+
 
     this.state = {
       show: false
     };
-
 
   }
 
@@ -31,24 +30,25 @@ class ModalC extends React.Component {
     console.log('sending.....', this.conceptName);
     fetch('http://localhost:4567/createConcept/' + this.conceptName, {
     method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
+    // headers: new Headers ( {
+    //   Accept: 'application/json',
+    //   'Content-Type': 'application/json',
+    // } ),
       body: JSON.stringify({
         name: this.conceptName,
+        author: this.author, //userName
+        type: this.type,
+        //user name for testing
         role: "Admin",
         userName: "Brian",
       }),
 
     })
     .then(function(response) {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        return response;
-    }).then(function(response) {
-        console.log("success");
+        const res = response.json();
+        res.then((json) => console.log(json) )
+        console.log(response);
+
     }).catch(function(error) {
         console.log(error);
     });
@@ -63,9 +63,16 @@ class ModalC extends React.Component {
     this.setState({ show: true });
   }
 
-  onFormChange(e) {
+  setName(e) {
     this.conceptName = e.target.value;
+  }
 
+  setAuthor(e){
+    this.author = e.target.value;
+  }
+
+  setType(e){
+    this.type = e.target.value;
   }
 
   render() {
@@ -80,7 +87,7 @@ class ModalC extends React.Component {
             <Modal.Title>New concept</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FormExample onFormChange={this.onFormChange} />
+            <FormExample setName={this.setName} setAuthor={this.setAuthor} setType={this.setType} />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Close</Button>
