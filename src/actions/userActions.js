@@ -62,6 +62,7 @@ export function loginUser(creds) {
 
     dispatch(requestLogin(creds))
 
+    //TODO: Set this local server
     return fetch('http://localhost:3001/sessions/create', config)
       .then(response =>
         response.json().then(user => ({ user, response }))

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
+import { loginUser } from '../../actions/userActions';
 import './login.css';
 
 class LoginForm extends Component {
@@ -22,6 +24,8 @@ class LoginForm extends Component {
 
   handleSubmit(e){
     e.preventDefault();
+    const creds = { username: this.state.username.trim(),password: this.state.password.trim() }
+    this.props.dispatch(loginUser(creds));
   }
   render() {
     return (
@@ -47,4 +51,14 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+function mapStateToProps(state) {
+  
+  const { auth } = state
+  const { isAuthenticated } = auth
+  
+  return {
+    isAuthenticated,
+  }
+}
+
+export default connect(mapStateToProps)(LoginForm);

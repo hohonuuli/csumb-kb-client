@@ -1,31 +1,38 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Nav, NavItem} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import './header.css';
+import { logoutUser } from '../../actions/userActions';
 
 class NavItems extends Component {
-  constructor(props){
-    super(props);
-    // this.state = ({
-    //   auth: false
-    // });
-  }
   render() {
-    // var logButton;
-    // if(this.state.auth == false){
-    //   logButton = (<LinkContainer to="/login"><NavItem eventKey={1}>Login</NavItem></LinkContainer>)
-    // }else{
-    //   logButton = (<LinkContainer to="/login"><NavItem eventKey={1}>Logout</NavItem></LinkContainer>)
-    // }
+    var logButton;
+    const { isAuthenticated } = this.props;
+    if(!isAuthenticated){
+      logButton = <LinkContainer to="/login"><NavItem>Login</NavItem></LinkContainer>;
+    }else{
+      logButton = <LinkContainer to={dispatchEvent(logoutUser())}>Logout</LinkContainer>
+    }
     return (
       <Nav pullRight>
-        <LinkContainer to="/login"><NavItem eventKey={1}>Login</NavItem></LinkContainer>
+        {logButton}
         <LinkContainer to="/profile">
-          <NavItem eventKey={2}>Profile</NavItem>
+          <NavItem>Profile</NavItem>
         </LinkContainer>
       </Nav>
     );
   }
 }
 
-export default NavItems;
+function mapStateToProps(state) {
+  
+  const { auth } = state
+  const { isAuthenticated } = auth
+  
+  return {
+    isAuthenticated,
+  }
+}
+
+export default connect(mapStateToProps)(NavItems);
