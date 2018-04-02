@@ -54,8 +54,7 @@ function receiveLogout() {
 export function loginUser(creds) {
   let config = {
     method: 'POST',
-    headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-    body: `username=${creds.username}&password=${creds.password}`
+    headers: { 'Content-Type':'application/json' },
   }
 
   return dispatch => {
@@ -63,7 +62,8 @@ export function loginUser(creds) {
     dispatch(requestLogin(creds))
 
     //TODO: Set this local server
-    return fetch('http://localhost:3001/sessions/create', config)
+    var fetchString = 'http://localhost:4567/userLogin/' + creds.username + '?password=' + creds.password;
+    return fetch(fetchString, config)
       .then(response =>
         response.json().then(user => ({ user, response }))
             ).then(({ user, response }) =>  {
@@ -74,8 +74,8 @@ export function loginUser(creds) {
           return Promise.reject(user)
         } else {
           // If login was successful, set the token in local storage
-          sessionStorage.setItem('id_token', user.id_token)
-          sessionStorage.setItem('access_token', user.access_token)
+          sessionStorage.setItem('access_token', user.jwt)
+          sessionStorage.setItem('access_username', creds.username)
           // Dispatch the success action
           dispatch(receiveLogin(user))
         }
@@ -86,8 +86,8 @@ export function loginUser(creds) {
 export function logoutUser() {
   return dispatch => {
     dispatch(requestLogout())
-    sessionStorage.removeItem('id_token')
     sessionStorage.removeItem('access_token')
+    sessionStorage.removeItem('access_username')
     dispatch(receiveLogout())
   }
 }
