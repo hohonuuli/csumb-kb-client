@@ -67,8 +67,7 @@ class MainView extends Component {
         <div id="objectConcept"></div>
         <ControlledTabs />
         <ModalC />
-
-
+        
       </div>
 
     );
