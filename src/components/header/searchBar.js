@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { setCurrentObject } from '../../actions/index';
-import Suggest from './suggest';
 import './header.css';
 
 class SearchBar extends Component {

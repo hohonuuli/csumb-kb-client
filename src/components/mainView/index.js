@@ -11,12 +11,20 @@ import ControlledTabs from '../tabView/tab';
 import ModalC from '../tabView/modal';
 
 class MainView extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentObject: {}
+    };
+  }
   componentWillMount(){
     fetch("http://localhost:8083/kb/v1/concept/object")
     .then(res => res.json())
     .then(
       (result) => {
         this.props.setCurrentObject(result);
+        this.setState({currentObject: result})
       },
       (error) => {
         console.log(error);
@@ -24,7 +32,7 @@ class MainView extends Component {
     )
   }
 
-  handleDelete = () => { //hard coding for now until I can set delete to 'currentObject'
+  handleDelete = () => {
   //http://localhost:4567/deleteConcept/hadal?userName=Brian
       console.log('Delete button was clicked!')
       fetch('http://localhost:4567/deleteConcept/' + this.props.currentObject.currentObject.name, {
@@ -56,7 +64,7 @@ class MainView extends Component {
   render() {
     console.log(this.props.currentObject.currentObject)
     return (
-      <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
         <AlertComp />
         <h1 className="page-header">Dashboard</h1>
         <Button className="pull-right" bsStyle="primary">Update</Button>

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "history": "^4.7.2",
+    "radium": "^0.22.1",
     "react": "^16.2.0",
     "react-autosuggest": "^9.3.4",
     "react-bootstrap": "^0.32.1",
