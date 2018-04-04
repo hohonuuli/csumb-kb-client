@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {withRouter} from "react-router-dom";
 import { Button, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
+import { loginUser } from '../../actions/userActions';
 import './login.css';
 
 class LoginForm extends Component {
@@ -22,6 +25,13 @@ class LoginForm extends Component {
 
   handleSubmit(e){
     e.preventDefault();
+    if(this.state.password === '' || this.state.username === ''){
+      console.log("empty");
+    }else{
+      const creds = { username: this.state.username.trim(),password: this.state.password.trim() }
+      this.props.dispatch(loginUser(creds));
+      setTimeout(() => {this.props.history.push("/")}, 1000);
+    }
   }
   render() {
     return (
@@ -47,4 +57,14 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+function mapStateToProps(state) {
+  
+  const { auth } = state
+  const { isAuthenticated } = auth
+  
+  return {
+    isAuthenticated,
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(LoginForm));

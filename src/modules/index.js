@@ -3,9 +3,11 @@
 
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import authReducer from './auth';
 import currentObjectReducer from './currentObject';
 
 export default combineReducers({
   router: routerReducer,
   currentObject: currentObjectReducer,
+  auth: authReducer,
 });

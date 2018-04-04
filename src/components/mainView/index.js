@@ -62,7 +62,6 @@ class MainView extends Component {
   }
 
   render() {
-    console.log(this.props.currentObject.currentObject)
     return (
       <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
         <AlertComp />
@@ -71,7 +70,7 @@ class MainView extends Component {
         <Button className="pull-right" bsStyle="primary">Add</Button>
         <Button className="pull-right" bsStyle="primary" onClick={this.handleDelete}>Delete</Button>
 
-        <h2 className="sub-header">{this.props.currentObject.currentObject.name || "Object (root)"}</h2>
+        <h2 className="sub-header">{this.props.currentObject.name || "Object (root)"}</h2>
         <div id="objectConcept"></div>
         <ControlledTabs />
         <ModalC />
@@ -84,9 +83,7 @@ class MainView extends Component {
 // Get apps state and pass it as props to currentObject
 //      > whenever state changes, the currentObject will automatically re-render
 function mapStateToProps(state) {
-    return {
-        currentObject: state.currentObject
-    };
+  return state.currentObject
 }
 
 // Get actions and pass them as props to to currentObject
