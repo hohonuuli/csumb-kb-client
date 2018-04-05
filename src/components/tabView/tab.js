@@ -23,7 +23,6 @@ class ControlledTabs extends Component {
   }
 
   render() {
-    console.log(this.props.currentObject);
     return (
       <Tabs
         activeKey={this.state.key}
