@@ -6,7 +6,7 @@ class AlertComp extends Component {
     super(props, context);
 
     this.state = {
-      show: false
+      show: this.props.show
     };
 
     this.handleDismiss = this.handleDismiss.bind(this);
@@ -24,9 +24,11 @@ class AlertComp extends Component {
   render() {
     if(this.state.show){
       return (
+        <div style={{width: "80%", margin: "0 auto"}}>
         <Alert bsStyle="danger" onDismiss={this.handleDismiss}>
-          <strong id="alertError">Warning!</strong> <span id="alertText"></span>
+          <strong id="alertError">{this.props.message}</strong> <span id="alertText"></span>
         </Alert>
+        </div>
       );
     }
     return <div></div>
