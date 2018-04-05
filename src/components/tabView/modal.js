@@ -27,31 +27,33 @@ class ModalC extends React.Component {
   }
 
   handleSubmit() {
-    console.log('sending.....', this.conceptName);
-    fetch('http://localhost:4567/createConcept/' + this.conceptName, {
+    const data = {
+      conceptName: this.conceptName,
+      userName: sessionStorage.getItem("access_username"),
+      password: sessionStorage.getItem("access_token")
+    }
+    console.log('sending.....', this.conceptName); // to do: find neater way to write query params
+    fetch('http://localhost:4567/createConcept/' + this.conceptName +'?userName=' +data.userName+'&jwt='+data.password, {
     method: 'POST',
-    // headers: new Headers ( {
-    //   Accept: 'application/json',
-    //   'Content-Type': 'application/json',
-    // } ),
       body: JSON.stringify({
         name: this.conceptName,
-        author: this.author, //userName
+        author: this.author,
         type: this.type,
-        //user name for testing
-        role: "Admin",
-        userName: "Brian",
+        role: "Admin", //get actual role
       }),
 
     })
     .then(function(response) {
         const res = response.json();
         res.then((json) => console.log(json) )
+        this.setState({ show: false });
         console.log(response);
 
     }).catch(function(error) {
         console.log(error);
     });
+
+    this.handleClose();
 
   }
 

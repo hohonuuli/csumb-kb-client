@@ -30,20 +30,20 @@ class ControlledTabs extends Component {
         id="controlled-tab-example"
       >
         <Tab eventKey={1} title="Names">
-          <h4>{JSON.stringify(this.props.currentObject.currentObject.name)}</h4>
-          <h5>{JSON.stringify(this.props.currentObject.currentObject.alternateNames)}</h5>
+        <h4>{this.props.currentObject.currentObject.name}</h4>
+          <h5>Alternate Names: {JSON.stringify(this.props.currentObject.currentObject.alternateNames)}</h5>
         </Tab>
         <Tab eventKey={2} title="Templates">
           {JSON.stringify(this.props.currentObject)}
         </Tab>
         <Tab eventKey={3} title="Properties">
-          {JSON.stringify(this.props.currentObject)}
+          {JSON.stringify(this.props.currentObject.currentObject.descriptors)}
         </Tab>
         <Tab eventKey={4} title="Media">
           {JSON.stringify(this.props.currentObject.currentObject.media)}
         </Tab>
         <Tab eventKey={5} title="History">
-          {JSON.stringify(this.props.currentObject)}
+          {JSON.stringify(this.props.currentObject.currentObject.history)}
         </Tab>
       </Tabs>
 

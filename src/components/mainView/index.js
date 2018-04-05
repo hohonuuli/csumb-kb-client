@@ -33,9 +33,12 @@ class MainView extends Component {
   }
 
   handleDelete = () => {
-  //http://localhost:4567/deleteConcept/hadal?userName=Brian
+      const data = {
+        userName: sessionStorage.getItem("access_username"),
+        password: sessionStorage.getItem("access_token")
+      }
       console.log('Delete button was clicked!')
-      fetch('http://localhost:4567/deleteConcept/' + this.props.currentObject.currentObject.name, {
+      fetch('http://localhost:4567/deleteConcept/' + this.props.currentObject.name +'?userName=' +data.userName+'&jwt='+data.password, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
@@ -45,7 +48,7 @@ class MainView extends Component {
           name: this.props.currentObject,
           //user name for testing
           role: "Admin",
-          userName: "Brian",
+          userName: data.userName,
         }),
 
       })
@@ -74,7 +77,7 @@ class MainView extends Component {
         <div id="objectConcept"></div>
         <ControlledTabs />
         <ModalC />
-        
+
       </div>
 
     );
