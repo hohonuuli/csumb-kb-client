@@ -15,7 +15,12 @@ class RegistrationForm extends Component {
       username: '',
       password: '',
       passwordConf: '',
+      firstName: '',
+      lastName: '',
+      affil: '',
+      email: '',
       error: '',
+      role: '',
     };
   }
 
@@ -27,13 +32,15 @@ class RegistrationForm extends Component {
 
   handleSubmit(e){
     e.preventDefault();
-    if(this.state.password === '' || this.state.username === ''){
+    if(this.state.password === '' || this.state.username === '' || this.state.firstName === '' || 
+    this.state.lastName === '' || this.state.affil === '' || this.state.email === '' || this.state.role === '' || this.state.role === "empty"){
       this.setState({error: "Empty fields"});
     }else if(this.state.passwordConf !== this.state.password){
       this.setState({error: "Passwords don't match"});
     }
     else{
-      const creds = { username: this.state.username.trim(),password: this.state.password.trim() }
+      // const creds = { username: this.state.username.trim(),password: this.state.password.trim() }
+      console.log(this.state);
     }
   }
   componentWillMount(){
@@ -58,6 +65,32 @@ class RegistrationForm extends Component {
           <FormGroup controlId="passwordConf">
             <Col componentClass={ControlLabel} sm={2}>Password Confirmation</Col>
             <Col sm={10}><FormControl type="password" placeholder="Password Confirmation" onChange={this.handleChange}/></Col>
+          </FormGroup>
+          <FormGroup controlId="firstName">
+            <Col componentClass={ControlLabel} sm={2}>First name</Col>
+            <Col sm={10}><FormControl type="text" placeholder="First name" onChange={this.handleChange}/></Col>
+          </FormGroup>
+          <FormGroup controlId="lastName">
+            <Col componentClass={ControlLabel} sm={2}>Last name</Col>
+            <Col sm={10}><FormControl type="text" placeholder="Last name" onChange={this.handleChange}/></Col>
+          </FormGroup>
+          <FormGroup controlId="email">
+            <Col componentClass={ControlLabel} sm={2}>Email</Col>
+            <Col sm={10}><FormControl type="text" placeholder="Email" onChange={this.handleChange}/></Col>
+          </FormGroup>
+          <FormGroup controlId="affil">
+            <Col componentClass={ControlLabel} sm={2}>Affiliation</Col>
+            <Col sm={10}><FormControl type="text" placeholder="Affiliation" onChange={this.handleChange}/></Col>
+          </FormGroup>
+          <FormGroup controlId="role">
+          <Col componentClass={ControlLabel} sm={2}>Role</Col>
+          <Col sm={10}>
+            <FormControl componentClass="select" placeholder="Select Role" onChange={this.handleChange}>
+              <option value="empty"></option>
+              <option value="Admin">Admin</option>
+              <option value="User">User</option>
+            </FormControl>
+          </Col>
           </FormGroup>
           <FormGroup>
             <Col style={{width: "500px", margin: "0 auto", textAlign: "center"}}>

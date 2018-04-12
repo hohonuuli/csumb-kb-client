@@ -17,7 +17,6 @@ class MainView extends Component {
     .then(
       (result) => {
         this.props.setCurrentObject(result);
-        this.setState({currentObject: result})
       },
       (error) => {
         console.log(error);
@@ -55,21 +54,19 @@ class MainView extends Component {
   }
 
   render() {
-    const {isAuthenticated, currentObject} = this.props;
+    var {isAuthenticated, currentObject} = this.props;
     return (
       <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
         <AlertComp />
-        <h1 className="page-header">Dashboard</h1>
+        <h1 className="page-header">Knowledgebase Dashboard</h1>
+        <h2 className="sub-header" style={{textTransform: "capitalize"}}>{currentObject.currentObject.name}</h2>
         {isAuthenticated && 
-          <div>
+          <div style={{display: "inline-block"}}>
             <Button className="pull-right" bsStyle="primary">Update</Button>
             <Button className="pull-right" bsStyle="primary">Add</Button>
             <Button className="pull-right" bsStyle="primary" onClick={this.handleDelete}>Delete</Button>
           </div>
         } 
-
-        <h2 className="sub-header">{currentObject.name || "Object (root)"}</h2>
-        <div id="objectConcept"></div>
         <ControlledTabs />
         {isAuthenticated && 
           <div>
