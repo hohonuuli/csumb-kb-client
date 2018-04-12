@@ -11,13 +11,6 @@ import ControlledTabs from '../tabView/tab';
 import ModalC from '../tabView/modal';
 
 class MainView extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentObject: {}
-    };
-  }
   componentWillMount(){
     fetch("http://localhost:8083/kb/v1/concept/object")
     .then(res => res.json())
@@ -62,18 +55,27 @@ class MainView extends Component {
   }
 
   render() {
+    const {isAuthenticated, currentObject} = this.props;
     return (
       <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
         <AlertComp />
         <h1 className="page-header">Dashboard</h1>
-        <Button className="pull-right" bsStyle="primary">Update</Button>
-        <Button className="pull-right" bsStyle="primary">Add</Button>
-        <Button className="pull-right" bsStyle="primary" onClick={this.handleDelete}>Delete</Button>
+        {isAuthenticated && 
+          <div>
+            <Button className="pull-right" bsStyle="primary">Update</Button>
+            <Button className="pull-right" bsStyle="primary">Add</Button>
+            <Button className="pull-right" bsStyle="primary" onClick={this.handleDelete}>Delete</Button>
+          </div>
+        } 
 
-        <h2 className="sub-header">{this.props.currentObject.name || "Object (root)"}</h2>
+        <h2 className="sub-header">{currentObject.name || "Object (root)"}</h2>
         <div id="objectConcept"></div>
         <ControlledTabs />
-        <ModalC />
+        {isAuthenticated && 
+          <div>
+            <ModalC />
+          </div>
+        }
 
 
       </div>
@@ -84,9 +86,14 @@ class MainView extends Component {
 // Get apps state and pass it as props to currentObject
 //      > whenever state changes, the currentObject will automatically re-render
 function mapStateToProps(state) {
-  return state.currentObject
+  
+  const { currentObject, auth } = state
+  const { isAuthenticated } = auth
+  return {
+    currentObject,
+    isAuthenticated
+  }
 }
-
 // Get actions and pass them as props to to currentObject
 //      > now currentObject has this.props.currentObject
 function matchDispatchToProps(dispatch){

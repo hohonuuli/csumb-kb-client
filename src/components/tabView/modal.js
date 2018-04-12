@@ -79,7 +79,7 @@ class ModalC extends React.Component {
     return (
       <div>
         <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
-          <p>Add new concept</p>
+          Add new concept
         </Button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
