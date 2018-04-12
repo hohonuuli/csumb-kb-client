@@ -39,8 +39,27 @@ class RegistrationForm extends Component {
       this.setState({error: "Passwords don't match"});
     }
     else{
-      // const creds = { username: this.state.username.trim(),password: this.state.password.trim() }
-      console.log(this.state);
+      let config = {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json' },
+      }
+    
+      var fetchString = 'http://localhost:4567/addUserAccount/' + this.state.username + 
+      '?password=' + this.state.password + '&firstName=' + this.state.firstName + '&lastName=' + this.state.lastName + 
+      '&affiliation=' +  this.state.affil +  '&email=' + this.state.email + '&role=' + this.state.role;
+
+      fetch(fetchString, config)
+        .then(response =>
+          response.json().then(user => ({ user, response }))
+              ).then(({ user, response }) =>  {
+          if (!response.ok) {
+            this.setState({error: user.message});
+          } else if(user.code === "401") {
+              this.setState({error: "User account: " + this.state.username + " already exists."});
+          } else {
+              this.setState({error: "User account: " + this.state.username + " was created."});
+          }
+        }).catch(err => this.setState({error: err}))
     }
   }
   componentWillMount(){
