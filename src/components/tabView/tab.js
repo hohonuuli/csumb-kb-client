@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 
 import { setCurrentObject } from '../../actions/index';
 import { Tabs, Tab } from 'react-bootstrap';
+import MediaTab from './mediaTab';
+import HistoryTab from './historyTab';
 
 
 class ControlledTabs extends Component {
@@ -23,6 +25,7 @@ class ControlledTabs extends Component {
   }
 
   render() {
+    const currentObject = this.props.currentObject.currentObject;
     return (
       <Tabs
         activeKey={this.state.key}
@@ -30,19 +33,19 @@ class ControlledTabs extends Component {
         id="controlled-tab-example"
       >
         <Tab eventKey={1} title="Names">
-          {JSON.stringify(this.props.currentObject)}
+          {JSON.stringify(currentObject)}
         </Tab>
         <Tab eventKey={2} title="Templates">
-          {JSON.stringify(this.props.currentObject)}
+          {JSON.stringify(currentObject)}
         </Tab>
         <Tab eventKey={3} title="Properties">
-          {JSON.stringify(this.props.currentObject)}
+          {JSON.stringify(currentObject)}
         </Tab>
         <Tab eventKey={4} title="Media">
-          {JSON.stringify(this.props.currentObject)}
+          <MediaTab media={currentObject.media} />
         </Tab>
         <Tab eventKey={5} title="History">
-          {JSON.stringify(this.props.currentObject)}
+          <HistoryTab history={currentObject.history}/>
         </Tab>
       </Tabs>
 

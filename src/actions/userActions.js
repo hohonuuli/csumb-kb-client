@@ -61,7 +61,6 @@ export function loginUser(creds) {
 
     dispatch(requestLogin(creds))
 
-    //TODO: Set this local server
     var fetchString = 'http://localhost:4567/userLogin/' + creds.username + '?password=' + creds.password;
     return fetch(fetchString, config)
       .then(response =>

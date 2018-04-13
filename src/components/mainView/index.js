@@ -11,8 +11,15 @@ import ControlledTabs from '../tabView/tab';
 import ModalC from '../tabView/modal';
 
 class MainView extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      error: '',
+    };
+  }
   componentWillMount(){
-    fetch("http://localhost:8083/kb/v1/concept/object")
+    fetch("http://localhost:4567/getMetadata/object")
     .then(res => res.json())
     .then(
       (result) => {
@@ -25,39 +32,31 @@ class MainView extends Component {
   }
 
   handleDelete = () => {
-  //http://localhost:4567/deleteConcept/hadal?userName=Brian
-      console.log('Delete button was clicked!')
-      fetch('http://localhost:4567/deleteConcept/' + this.props.currentObject.currentObject.name, {
+    let config = {
       method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-        body: JSON.stringify({
-          name: this.props.currentObject,
-          //user name for testing
-          role: "Admin",
-          userName: "Brian",
-        }),
+      headers: { 'Content-Type':'application/json' },
+    }
+  
+    var fetchString = 'http://localhost:4567/deleteConcept/' + this.props.currentObject.currentObject.name + 
+    '?userName=' + sessionStorage.getItem("access_username") + "&jwt=" + sessionStorage.getItem("access_token");
 
-      })
-      .then(function(response) {
-          const res = response.json();
-          res.then((json) => console.log(json) )
-          console.log(response);
-
-
-      }).catch(function(error) {
-          console.log(error);
-      });
+    fetch(fetchString, config)
+      .then(response =>
+        response.json().then(user => ({ user, response }))
+            ).then(({ user, response }) =>  {
+              this.setState({error: user.message});
+      }).catch(err => this.setState({error: err}))
 
   }
 
   render() {
     var {isAuthenticated, currentObject} = this.props;
+    const { error } = this.state;
     return (
       <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-        <AlertComp />
+        {error &&
+          <AlertComp show={true} message={error}/>
+        }
         <h1 className="page-header">Knowledgebase Dashboard</h1>
         <h2 className="sub-header" style={{textTransform: "capitalize"}}>{currentObject.currentObject.name}</h2>
         {isAuthenticated && 
