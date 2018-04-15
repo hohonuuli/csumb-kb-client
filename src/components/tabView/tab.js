@@ -42,7 +42,7 @@ class ControlledTabs extends Component {
           {JSON.stringify(currentObject)}
         </Tab>
         <Tab eventKey={4} title="Media">
-          <MediaTab media={currentObject.media} />
+          <MediaTab isAuthenticated={this.props.isAuthenticated} conceptName={currentObject.name} media={currentObject.media} />
         </Tab>
         <Tab eventKey={5} title="History">
           <HistoryTab history={currentObject.history}/>
@@ -56,8 +56,11 @@ class ControlledTabs extends Component {
 // Get apps state and pass it as props to currentObject
 //      > whenever state changes, the currentObject will automatically re-render
 function mapStateToProps(state) {
+  const { auth } = state
+  const { isAuthenticated } = auth
     return {
-        currentObject: state.currentObject
+        currentObject: state.currentObject,
+        isAuthenticated
     };
 }
 

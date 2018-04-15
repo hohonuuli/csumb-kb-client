@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Button, Checkbox, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
+import { Checkbox, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
+import MediaModal from './mediaModal';
 
 class MediaTab extends Component {
   render() {
     const { media } = this.props;
     var data = "";
-    
     if(!media){
         data = <h3>No media</h3>
     }else{
@@ -13,7 +13,6 @@ class MediaTab extends Component {
             data = <h3>No media</h3>
         }else{
             data = media.map(mediaItem => {
-                console.log(mediaItem);
                 return (
                     <div style={{backgroundColor: "#f5f5f5", padding: "10px", marginBottom: "10px", borderRadius: "10px"}} key={mediaItem.url}>
                         
@@ -67,7 +66,15 @@ class MediaTab extends Component {
         }
     }
     return (
-        <div>{data}</div>
+        <div>
+            {this.props.isAuthenticated && 
+                <div>
+                    <MediaModal conceptName={this.props.conceptName}/>
+                    <br/>
+                </div>
+            }
+            <div>{data}</div>
+        </div>
     );
   }
 }
