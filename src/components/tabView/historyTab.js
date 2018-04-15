@@ -10,9 +10,25 @@ class HistoryTab extends Component {
         if(history.length === 0){
             data = <h3>No history</h3>
         }else{
-            data = <div style={{overflowY: "scroll", height: "350px"}}>{history.map(historyItem => {
-                return JSON.stringify(historyItem);
-            })}</div>
+            data = 
+            <div style={{overflowY: "scroll"}}>
+            {history.map(historyItem => {
+                return (
+                    <div style={{marginBottom: "10px", borderBottom: "solid 1px #757575"}} key={historyItem.Date_Created}>
+                        <ul style={{listStyle: "none"}}>
+                            <li>Action: {historyItem.Action}</li>
+                            <li>Created: {historyItem.Creator_Name}</li>
+                            <li>Approved: {historyItem.is_approved? "True": "False"}</li>
+                            <li>Field: {historyItem.Field}</li>
+                            <li>Old Value: {historyItem.Previous_Value}</li>
+                            <li>New Value: {historyItem.New_Value}</li>
+                            <li>Item Processor: {historyItem.Processor_Name}</li>
+                            <li>Process date: {historyItem.Processed_Date}</li>
+                        </ul>
+                    </div>
+                );
+            })}
+            </div>
         }
     }
     return (

@@ -26,7 +26,7 @@ class AlertComp extends Component {
       setTimeout(this.handleDismiss, 3000);
       return (
         <div style={{width: "80%", margin: "0 auto"}}>
-        <Alert bsStyle="danger" onDismiss={this.handleDismiss}>
+        <Alert bsStyle={this.props.bsStyle} onDismiss={this.handleDismiss}>
           <strong id="alertError">{this.props.message}</strong> <span id="alertText"></span>
         </Alert>
         </div>

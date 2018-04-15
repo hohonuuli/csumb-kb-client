@@ -19,6 +19,7 @@ class MediaModal extends React.Component {
         credit: '',
         type: 'Image',
         error: '',
+        alertStyle: '',
     };
 
   }
@@ -36,19 +37,18 @@ class MediaModal extends React.Component {
       var fetchString = 'http://localhost:4567/addConceptMedia/' + this.props.conceptName + 
       '?type=' + this.state.type + '&url=' + this.state.url + '&caption=' + this.state.caption + '&credit=' + this.state.credit + 
       '&primary=false&jwt=' + sessionStorage.getItem('access_token') + "&userName=" + sessionStorage.getItem("access_username");
-      console.log(fetchString);
       fetch(fetchString, config)
         .then(response =>
           response.json().then(user => ({ user, response }))
               ).then(({ user, response }) =>  {
           if (!response.ok) {
-            this.setState({error: user.message});
+            this.setState({error: user.message, alertStyle: 'danger'});
           } else if(user.code === "401") {
-              this.setState({error: user.message});
+              this.setState({error: user.message, alertStyle: 'danger'});
           } else {
-              this.setState({error: "Media item was added."});
+              this.setState({error: "Media item was added.", alertStyle: 'success'});
           }
-        }).catch(err => this.setState({error: err}))
+        }).catch(err => this.setState({error: err, alertStyle: 'danger'}))
     }
   }
   handleChange(e){
@@ -76,7 +76,7 @@ class MediaModal extends React.Component {
             <Modal.Title>New media item</Modal.Title>
           </Modal.Header>
             {this.state.error &&
-                <AlertComp show={true} message={this.state.error}/>
+                <AlertComp show={true} bsStyle={this.state.alertStyle} message={this.state.error}/>
             }
           <Modal.Body style={{padding: "0 30px 0 30px"}}>
             

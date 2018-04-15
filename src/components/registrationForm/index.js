@@ -21,6 +21,7 @@ class RegistrationForm extends Component {
       email: '',
       error: '',
       role: '',
+      alertStyle: '',
     };
   }
 
@@ -53,13 +54,13 @@ class RegistrationForm extends Component {
           response.json().then(user => ({ user, response }))
               ).then(({ user, response }) =>  {
           if (!response.ok) {
-            this.setState({error: user.message});
+            this.setState({error: user.message, alertStyle: 'danger'});
           } else if(user.code === "401") {
-              this.setState({error: "User account: " + this.state.username + " already exists."});
+              this.setState({error: "User account: " + this.state.username + " already exists.", alertStyle: 'danger'});
           } else {
-              this.setState({error: "User account: " + this.state.username + " was created."});
+              this.setState({error: "User account: " + this.state.username + " was created.", alertStyle: 'success'});
           }
-        }).catch(err => this.setState({error: err}))
+        }).catch(err => this.setState({error: err, alertStyle: 'danger'}))
     }
   }
   componentWillMount(){
@@ -118,7 +119,7 @@ class RegistrationForm extends Component {
           </FormGroup>
         </Form>
         {error &&
-          <AlertComp show={true} message={this.state.error}/>
+          <AlertComp bsStyle={this.state.alertStyle} show={true} message={this.state.error}/>
         }
       </div>
     );

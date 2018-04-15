@@ -12,9 +12,11 @@ class MediaTab extends Component {
         if(media.length === 0){
             data = <h3>No media</h3>
         }else{
+            var count = 0;
             data = media.map(mediaItem => {
+                count++;
                 return (
-                    <div style={{backgroundColor: "#f5f5f5", padding: "10px", marginBottom: "10px", borderRadius: "10px"}} key={mediaItem.url}>
+                    <div style={{backgroundColor: "#f5f5f5", padding: "10px", marginBottom: "10px", borderRadius: "10px"}} key={mediaItem.url + count}>
                         
                     <Form horizontal>
                         <FormGroup controlId="formHorizontalUrl">

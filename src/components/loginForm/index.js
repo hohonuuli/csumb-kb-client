@@ -59,7 +59,7 @@ class LoginForm extends Component {
           </FormGroup>
         </Form>
         {errorMessage &&
-          <AlertComp show={true} message={"Wrong username or password"}/>
+          <AlertComp bsStyle={'danger'} show={true} message={"Wrong username or password"}/>
         }
       </div>
     );
