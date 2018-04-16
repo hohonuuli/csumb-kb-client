@@ -11,6 +11,7 @@ class ControlledTabs extends Component {
     super(props, context);
 
     this.handleSelect = this.handleSelect.bind(this);
+    this.altNames = ""
 
     this.state = {
       key: 1
@@ -20,7 +21,28 @@ class ControlledTabs extends Component {
   handleSelect(key) {
     //alert(`selected ${key}`);
     this.setState({ key });
-  }
+
+    // if(key === 1){
+    //   console.log("key is one")
+    //   this.altNames = "Altername names: " + this.props.currentObject.currentObject.alternateNames;
+    //   if(this.altNames===""){
+    //     this.altNames = "No altername names"
+    //   }
+    // }
+    switch(key){
+      case 1:
+        console.log("key is one")
+        break;
+
+      default:
+        console.log("ok");
+
+    }
+
+
+
+
+  }//end
 
   render() {
     return (
@@ -31,10 +53,10 @@ class ControlledTabs extends Component {
       >
         <Tab eventKey={1} title="Names">
         <h4>{this.props.currentObject.currentObject.name}</h4>
-          <h5>Alternate Names: {JSON.stringify(this.props.currentObject.currentObject.alternateNames)}</h5>
+          <h5>{this.altNames}</h5>
         </Tab>
         <Tab eventKey={2} title="Templates">
-          {JSON.stringify(this.props.currentObject)}
+          Templates go here
         </Tab>
         <Tab eventKey={3} title="Properties">
           {JSON.stringify(this.props.currentObject.currentObject.descriptors)}
