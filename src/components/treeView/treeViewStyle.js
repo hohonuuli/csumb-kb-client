@@ -7,7 +7,7 @@ export default {
             padding: 0,
             color: '#000000',
             fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif',
-            fontSize: '13px'
+            fontSize: '12px'
         },
         node: {
             base: {

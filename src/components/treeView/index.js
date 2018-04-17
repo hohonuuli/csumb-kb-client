@@ -19,13 +19,17 @@ class TreeView extends Component {
   }
 
   onToggle(node, toggled){
+        let config = {
+          method: 'GET',
+          headers: { 'Content-Type':'application/json' },
+        }
         if(this.state.cursor){this.state.cursor.active = false;}
         node.active = true;
         if(node.children){ node.toggled = toggled; }
         this.setState({ cursor: node });
 
         var nodeName = encodeURIComponent((node.name).trim());
-        fetch("http://localhost:8083/kb/v1/concept/" + nodeName)
+        fetch("http://localhost:4567/getMetadata/" + nodeName, config)
         .then(res => res.json())
         .then(
           (result) => {

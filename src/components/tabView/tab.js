@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 
 import { setCurrentObject } from '../../actions/index';
 import { Tabs, Tab } from 'react-bootstrap';
+import MediaTab from './mediaTab';
+import HistoryTab from './historyTab';
 
 
 class ControlledTabs extends Component {
@@ -45,6 +47,7 @@ class ControlledTabs extends Component {
   }//end
 
   render() {
+    const currentObject = this.props.currentObject.currentObject;
     return (
       <Tabs
         activeKey={this.state.key}
@@ -56,16 +59,16 @@ class ControlledTabs extends Component {
           <h5>{this.altNames}</h5>
         </Tab>
         <Tab eventKey={2} title="Templates">
-          Templates go here
+          {JSON.stringify(currentObject)}
         </Tab>
         <Tab eventKey={3} title="Properties">
-          {JSON.stringify(this.props.currentObject.currentObject.descriptors)}
+          {JSON.stringify(currentObject)}
         </Tab>
         <Tab eventKey={4} title="Media">
-          {JSON.stringify(this.props.currentObject.currentObject.media)}
+          <MediaTab isAuthenticated={this.props.isAuthenticated} conceptName={currentObject.name} media={currentObject.media} />
         </Tab>
         <Tab eventKey={5} title="History">
-          {JSON.stringify(this.props.currentObject.currentObject.history)}
+          <HistoryTab history={currentObject.history}/>
         </Tab>
       </Tabs>
 
@@ -76,8 +79,11 @@ class ControlledTabs extends Component {
 // Get apps state and pass it as props to currentObject
 //      > whenever state changes, the currentObject will automatically re-render
 function mapStateToProps(state) {
+  const { auth } = state
+  const { isAuthenticated } = auth
     return {
-        currentObject: state.currentObject
+        currentObject: state.currentObject,
+        isAuthenticated
     };
 }
 
