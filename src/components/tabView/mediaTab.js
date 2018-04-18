@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Checkbox, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 import MediaModal from './mediaModal';
+import ConceptModal from './conceptModal';
 
 class MediaTab extends Component {
   render() {
@@ -70,9 +71,9 @@ class MediaTab extends Component {
     return (
         <div>
             {this.props.isAuthenticated && 
-                <div>
+                <div className={"row"} style={{width: "100%", paddingRight: "33%", display: "inline-block", margin: "5px"}}>
                     <MediaModal conceptName={this.props.conceptName}/>
-                    <br/>
+                    <ConceptModal />
                 </div>
             }
             <div>{data}</div>

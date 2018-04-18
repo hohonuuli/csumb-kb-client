@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ConceptModal from './conceptModal';
 
 class HistoryTab extends Component {
   render() {
@@ -32,7 +33,14 @@ class HistoryTab extends Component {
         }
     }
     return (
-        <div>{data}</div>
+        <div>
+            {this.props.isAuthenticated && 
+                <div className={"row"} style={{width: "100%", paddingRight: "42%", display: "inline-block", margin: "5px"}}>
+                    <ConceptModal />
+                </div>
+            }
+            <div>{data}</div>
+        </div>
     );
   }
 }

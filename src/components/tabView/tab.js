@@ -45,7 +45,7 @@ class ControlledTabs extends Component {
           <MediaTab isAuthenticated={this.props.isAuthenticated} conceptName={currentObject.name} media={currentObject.media} />
         </Tab>
         <Tab eventKey={5} title="History">
-          <HistoryTab history={currentObject.history}/>
+          <HistoryTab  isAuthenticated={this.props.isAuthenticated} history={currentObject.history}/>
         </Tab>
       </Tabs>
 

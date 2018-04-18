@@ -8,7 +8,6 @@ import { setCurrentObject } from '../../actions/index';
 import './mainView.css';
 
 import ControlledTabs from '../tabView/tab';
-import ModalC from '../tabView/modal';
 
 class MainView extends Component {
   constructor(props, context) {
@@ -67,12 +66,6 @@ class MainView extends Component {
           </div>
         } 
         <ControlledTabs />
-        {isAuthenticated && 
-          <div>
-            <ModalC />
-          </div>
-        }
-
 
       </div>
 
