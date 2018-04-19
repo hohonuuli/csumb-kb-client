@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 
 class NameTab extends Component {
   render() {
-    const { names } = this.props;
     const { alternates } = this.props;
     var altName = "";
     if (!alternates){
@@ -14,8 +13,6 @@ class NameTab extends Component {
            altName = <h4>No alternate names</h4>
         }else{
             var count = 0;
-            console.log(alternates.length)
-            console.log(alternates)
             altName = alternates.map(altItem => {
                 count++;
                 return (
