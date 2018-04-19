@@ -8,7 +8,7 @@ import MediaTab from './mediaTab';
 import HistoryTab from './historyTab';
 import PropTab from './propertiesTab';
 import NameTab from './nameTab';
-
+import TemplatesTab from './templatesTab';
 
 class ControlledTabs extends Component {
   constructor(props, context) {
@@ -41,7 +41,7 @@ class ControlledTabs extends Component {
           <NameTab alternates={currentObject.alternateNames} />
         </Tab>
         <Tab eventKey={2} title="Templates">
-          {JSON.stringify(currentObject)}
+          <TemplatesTab templates={currentObject.alternateNames} />
         </Tab>
         <Tab eventKey={3} title="Properties">
           <PropTab conceptName={currentObject.name} properties={currentObject.descriptors} />
