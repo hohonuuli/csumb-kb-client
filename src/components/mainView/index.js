@@ -37,7 +37,7 @@ class MainView extends Component {
       headers: { 'Content-Type':'application/json' },
     }
 
-    var fetchString = 'http://localhost:4567/deleteConcept/' + this.props.currentObject.currentObject.name + 
+    var fetchString = 'http://localhost:4567/deleteConcept/' + this.props.currentObject.currentObject.name +
     '?userName=' + sessionStorage.getItem("access_username") + "&jwt=" + sessionStorage.getItem("access_token");
 
     fetch(fetchString, config)

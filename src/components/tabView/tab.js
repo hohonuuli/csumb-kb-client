@@ -6,6 +6,8 @@ import { setCurrentObject } from '../../actions/index';
 import { Tabs, Tab } from 'react-bootstrap';
 import MediaTab from './mediaTab';
 import HistoryTab from './historyTab';
+import PropTab from './propertiesTab';
+import NameTab from './nameTab';
 
 
 class ControlledTabs extends Component {
@@ -27,19 +29,10 @@ class ControlledTabs extends Component {
     // if(key === 1){
     //   console.log("key is one")
     //   this.altNames = "Altername names: " + this.props.currentObject.currentObject.alternateNames;
-    //   if(this.altNames===""){
-    //     this.altNames = "No altername names"
+    //   if(this.altNames==="" || this.altName===undefined){
+    //     this.altNames = "No alternate names"
     //   }
     // }
-    switch(key){
-      case 1:
-        console.log("key is one")
-        break;
-
-      default:
-        console.log("ok");
-
-    }
 
 
 
@@ -55,14 +48,14 @@ class ControlledTabs extends Component {
         id="controlled-tab-example"
       >
         <Tab eventKey={1} title="Names">
-        <h4>{this.props.currentObject.currentObject.name}</h4>
-          <h5>{this.altNames}</h5>
+          <h3>{currentObject.name}</h3>
+          <NameTab names={currentObject.name} alternates={currentObject.alternateNames} />
         </Tab>
         <Tab eventKey={2} title="Templates">
           {JSON.stringify(currentObject)}
         </Tab>
         <Tab eventKey={3} title="Properties">
-          {JSON.stringify(currentObject)}
+          <PropTab conceptName={currentObject.name} properties={currentObject.descriptors} />
         </Tab>
         <Tab eventKey={4} title="Media">
           <MediaTab isAuthenticated={this.props.isAuthenticated} conceptName={currentObject.name} media={currentObject.media} />
@@ -71,7 +64,6 @@ class ControlledTabs extends Component {
           <HistoryTab history={currentObject.history}/>
         </Tab>
       </Tabs>
-
     );
   }
 }

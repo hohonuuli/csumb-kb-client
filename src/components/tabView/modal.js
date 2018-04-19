@@ -39,7 +39,7 @@ class ModalC extends React.Component {
         name: this.conceptName,
         author: this.author,
         type: this.type,
-        role: "Admin", //get actual role
+        role: "Admin", //get actual role.. do I even need this?
       }),
 
     })

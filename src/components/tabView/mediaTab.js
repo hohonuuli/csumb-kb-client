@@ -17,11 +17,11 @@ class MediaTab extends Component {
                 count++;
                 return (
                     <div style={{backgroundColor: "#f5f5f5", padding: "10px", marginBottom: "10px", borderRadius: "10px"}} key={mediaItem.url + count}>
-                        
+
                     <Form horizontal>
                         <FormGroup controlId="formHorizontalUrl">
                             <Col componentClass={ControlLabel} sm={2}>
-                            URL: 
+                            URL:
                             </Col>
                             <Col sm={10}>
                                 <FormControl type="text" placeholder="" value={mediaItem.url} readOnly/>
@@ -33,7 +33,7 @@ class MediaTab extends Component {
                             Caption
                             </Col>
                             <Col sm={10}>
-                            <   FormControl type="text" placeholder="" value={mediaItem.caption} readOnly/>
+                            <FormControl type="text" placeholder="" value={mediaItem.caption} readOnly/>
                             </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalCredit">
@@ -54,8 +54,8 @@ class MediaTab extends Component {
                         </FormGroup>
                         <FormGroup>
                             <Col smOffset={2} sm={10}>
-                            {mediaItem.isPrimary === "true" ? 
-                                <Checkbox readOnly checked>Primary?</Checkbox> : 
+                            {mediaItem.isPrimary === "true" ?
+                                <Checkbox readOnly checked>Primary?</Checkbox> :
                                 <Checkbox readOnly>Primary?</Checkbox>
                             }
                             </Col>
@@ -69,7 +69,7 @@ class MediaTab extends Component {
     }
     return (
         <div>
-            {this.props.isAuthenticated && 
+            {this.props.isAuthenticated &&
                 <div>
                     <MediaModal conceptName={this.props.conceptName}/>
                     <br/>
