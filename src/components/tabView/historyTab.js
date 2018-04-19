@@ -36,7 +36,7 @@ class HistoryTab extends Component {
         <div>
             {this.props.isAuthenticated && 
                 <div className={"row"} style={{width: "100%", paddingRight: "42%", display: "inline-block", margin: "5px"}}>
-                    <ConceptModal />
+                    <ConceptModal parent={this.props.conceptName}/>
                 </div>
             }
             <div>{data}</div>

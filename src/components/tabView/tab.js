@@ -42,10 +42,10 @@ class ControlledTabs extends Component {
           {JSON.stringify(currentObject)}
         </Tab>
         <Tab eventKey={4} title="Media">
-          <MediaTab isAuthenticated={this.props.isAuthenticated} conceptName={currentObject.name} media={currentObject.media} />
+          <MediaTab isAuthenticated={this.props.isAuthenticated} conceptName={currentObject.name} media={currentObject.media}/>
         </Tab>
         <Tab eventKey={5} title="History">
-          <HistoryTab  isAuthenticated={this.props.isAuthenticated} history={currentObject.history}/>
+          <HistoryTab  isAuthenticated={this.props.isAuthenticated} history={currentObject.history} conceptName={currentObject.name}/>
         </Tab>
       </Tabs>
 
