@@ -50,13 +50,6 @@ class MainView extends Component {
 
   }
 
-
-  handleAdd = () => {
-
-
-
-  }
-
   render() {
     var {isAuthenticated, currentObject} = this.props;
     const { error } = this.state;
