@@ -4,6 +4,7 @@ import {withRouter} from "react-router-dom";
 import { Button, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 import { loginUser } from '../../actions/userActions';
 import './login.css';
+import AlertComp from '../../components/common/alertComp';
 
 class LoginForm extends Component {
   constructor(props, context) {
@@ -30,10 +31,15 @@ class LoginForm extends Component {
     }else{
       const creds = { username: this.state.username.trim(),password: this.state.password.trim() }
       this.props.dispatch(loginUser(creds));
-      setTimeout(() => {this.props.history.push("/")}, 1000);
+      setTimeout(() => {
+        if(!this.props.errorMessage){
+          this.props.history.push("/");
+        }
+      }, 1000);
     }
   }
   render() {
+    const {errorMessage} = this.props;
     return (
       <div className="login-form">
         <h2 style={{paddingTop:"50px", textAlign: "center"}}>Knowledgebase Login</h2>
@@ -52,18 +58,22 @@ class LoginForm extends Component {
             </Col>
           </FormGroup>
         </Form>
+        {errorMessage &&
+          <AlertComp bsStyle={'danger'} show={true} message={"Wrong username or password"}/>
+        }
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  
+
   const { auth } = state
-  const { isAuthenticated } = auth
-  
+  const { isAuthenticated, errorMessage } = auth
+
   return {
     isAuthenticated,
+    errorMessage
   }
 }
 

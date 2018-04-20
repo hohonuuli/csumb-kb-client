@@ -61,7 +61,6 @@ export function loginUser(creds) {
 
     dispatch(requestLogin(creds))
 
-    //TODO: Set this local server
     var fetchString = 'http://localhost:4567/userLogin/' + creds.username + '?password=' + creds.password;
     return fetch(fetchString, config)
       .then(response =>
@@ -72,12 +71,15 @@ export function loginUser(creds) {
           // dispatch the error condition
           dispatch(loginError(user.message))
           return Promise.reject(user)
+        } else if(user.code === "401") {
+            dispatch(loginError(user.message))
+            return Promise.reject(user)
         } else {
-          // If login was successful, set the token in local storage
-          sessionStorage.setItem('access_token', user.jwt)
-          sessionStorage.setItem('access_username', creds.username)
-          // Dispatch the success action
-          dispatch(receiveLogin(user))
+            // If login was successful, set the token in session storage
+            sessionStorage.setItem('access_token', user.jwt)
+            sessionStorage.setItem('access_username', creds.username)
+
+            dispatch(receiveLogin(user))
         }
       }).catch(err => console.log("Error: ", err))
   }

@@ -19,16 +19,19 @@ class NavItems extends Component {
   }
   render() {
     var logButton;
-    if(!sessionStorage.getItem('access_token')){
+    const {isAuthenticated} = this.props;
+    if(!isAuthenticated){
       logButton = <LinkContainer to="/login"><NavItem>Login</NavItem></LinkContainer>;
     }else{
       logButton = <LinkContainer to="/"><NavItem><div onClick={this.onClick}>Logout</div></NavItem></LinkContainer>;
     }
     return (
       <Nav pullRight>
-        <LinkContainer to="/profile">
-          <NavItem>Profile</NavItem>
+        {isAuthenticated && 
+        <LinkContainer to="/settings">
+          <NavItem>Settings</NavItem>
         </LinkContainer>
+        } 
         {logButton}
       </Nav>
     );
@@ -36,9 +39,11 @@ class NavItems extends Component {
 }
 
 function mapStateToProps(state) {
+  const { auth } = state
+  const { isAuthenticated } = auth
   return {
-    state
-  };
+    isAuthenticated
+  }
 }
 
 function matchDispatchToProps(dispatch){
