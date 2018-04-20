@@ -43,10 +43,10 @@ class ConceptModal extends React.Component {
         method: 'POST',
         headers: { 'Content-Type':'application/json' },
       }
-    
+
       var fetchString = 'http://localhost:4567/createConcept/' + this.state.conceptName + "?parent=" + this.props.parent +
       '&jwt=' + sessionStorage.getItem('access_token') + "&userName=" + sessionStorage.getItem("access_username");
-      
+
       fetch(fetchString, config)
         .then(response =>
           response.json().then(user => ({ user, response }))
@@ -64,8 +64,8 @@ class ConceptModal extends React.Component {
 
   render() {
     return (
-      <div>
-        <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
+      <div style={{display: "inline-block"}}>
+        <Button bsStyle="primary" className="pull-right" onClick={this.handleShow}>
           Add new concept
         </Button>
 
