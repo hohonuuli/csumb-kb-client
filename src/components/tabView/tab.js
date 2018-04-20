@@ -37,8 +37,9 @@ class ControlledTabs extends Component {
         id="controlled-tab-example"
       >
         <Tab eventKey={1} title="Names">
-          <h3>{currentObject.name}</h3>
-          <NameTab alternates={currentObject.alternateNames} />
+          <h3 style={{textTransform: "capitalize"}}>{currentObject.name}</h3>
+
+          <NameTab conceptName={currentObject.name} alternates={currentObject.alternateNames} isAuthenticated={this.props.isAuthenticated} />
         </Tab>
         <Tab eventKey={2} title="Templates">
           <TemplatesTab templates={currentObject.alternateNames} />

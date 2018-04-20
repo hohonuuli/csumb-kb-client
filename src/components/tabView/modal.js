@@ -80,7 +80,7 @@ class ModalC extends React.Component {
   render() {
     return (
       <div>
-        <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
+        <Button bsStyle="primary" className="pull-right" onClick={this.handleShow}>
           Add new concept
         </Button>
 

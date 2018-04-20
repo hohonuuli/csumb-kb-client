@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class NameTab extends Component {
   render() {
     const { alternates } = this.props;

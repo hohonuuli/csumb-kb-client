@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, ButtonToolbar } from 'react-bootstrap';
 
 import AlertComp from '../../components/common/alertComp';
 import { setCurrentObject } from '../../actions/index';
@@ -9,6 +9,7 @@ import './mainView.css';
 
 import ControlledTabs from '../tabView/tab';
 import ModalC from '../tabView/modal';
+import AddName from '../tabView/addNameModal';
 
 class MainView extends Component {
   constructor(props, context) {
@@ -49,6 +50,13 @@ class MainView extends Component {
 
   }
 
+
+  handleAdd = () => {
+
+
+
+  }
+
   render() {
     var {isAuthenticated, currentObject} = this.props;
     const { error } = this.state;
@@ -61,9 +69,11 @@ class MainView extends Component {
         <h2 className="sub-header" style={{textTransform: "capitalize"}}>{currentObject.currentObject.name}</h2>
         {isAuthenticated &&
           <div style={{display: "inline-block"}}>
+          <ButtonToolbar>
             <Button className="pull-right" bsStyle="primary">Update</Button>
-            <Button className="pull-right" bsStyle="primary">Add</Button>
             <Button className="pull-right" bsStyle="primary" onClick={this.handleDelete}>Delete</Button>
+            <AddName conceptName={currentObject.currentObject.name}/>
+          </ButtonToolbar>
           </div>
         }
         <ControlledTabs />
