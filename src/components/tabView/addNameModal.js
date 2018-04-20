@@ -4,6 +4,7 @@ import { Button, Form, Radio } from 'react-bootstrap';
 import { FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap';
 import AlertComp from '../../components/common/alertComp';
 
+
 class AddName extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -69,7 +70,7 @@ class AddName extends React.Component {
   render() {
     return (
       <div>
-        <Button bsStyle="primary" className="pull-right" onClick={this.handleShow}>
+        <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
           Add Name
         </Button>
         <Modal show={this.state.show} onHide={this.handleClose}>

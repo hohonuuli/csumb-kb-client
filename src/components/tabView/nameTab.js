@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class NameTab extends Component {
   render() {
     const { alternates } = this.props;
+
     var altName = "";
     if (!alternates){
       altName = <h4>No alternate names</h4>
@@ -25,6 +26,7 @@ class NameTab extends Component {
     }
     return (
         <div>
+
             {altName}
         </div>
     );

@@ -79,9 +79,9 @@ class ModalC extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{display:'inline-block'}}>
         <Button bsStyle="primary" className="pull-right" onClick={this.handleShow}>
-          Add new concept
+          Add concept
         </Button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>

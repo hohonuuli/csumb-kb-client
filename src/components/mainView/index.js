@@ -70,18 +70,12 @@ class MainView extends Component {
         {isAuthenticated &&
           <div style={{display: "inline-block"}}>
           <ButtonToolbar>
-            <Button className="pull-right" bsStyle="primary">Update</Button>
             <Button className="pull-right" bsStyle="primary" onClick={this.handleDelete}>Delete</Button>
-            <AddName conceptName={currentObject.currentObject.name}/>
+            <ModalC />
           </ButtonToolbar>
           </div>
         }
         <ControlledTabs />
-        {isAuthenticated &&
-          <div>
-            <ModalC />
-          </div>
-        }
 
       </div>
 
