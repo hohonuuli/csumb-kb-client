@@ -67,10 +67,10 @@ class LoginForm extends Component {
 }
 
 function mapStateToProps(state) {
-  
+
   const { auth } = state
   const { isAuthenticated, errorMessage } = auth
-  
+
   return {
     isAuthenticated,
     errorMessage

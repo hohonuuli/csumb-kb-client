@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, ButtonToolbar } from 'react-bootstrap';
 
 import AlertComp from '../../components/common/alertComp';
 import { setCurrentObject } from '../../actions/index';
 import './mainView.css';
 
 import ControlledTabs from '../tabView/tab';
+import ConceptModal from '../tabView/conceptModal';
+import AddName from '../tabView/addNameModal';
 
 class MainView extends Component {
   constructor(props, context) {
@@ -35,8 +37,8 @@ class MainView extends Component {
       method: 'DELETE',
       headers: { 'Content-Type':'application/json' },
     }
-  
-    var fetchString = 'http://localhost:4567/deleteConcept/' + this.props.currentObject.currentObject.name + 
+
+    var fetchString = 'http://localhost:4567/deleteConcept/' + this.props.currentObject.currentObject.name +
     '?userName=' + sessionStorage.getItem("access_username") + "&jwt=" + sessionStorage.getItem("access_token");
 
     fetch(fetchString, config)
@@ -45,6 +47,13 @@ class MainView extends Component {
             ).then(({ user, response }) =>  {
               this.setState({error: user.message});
       }).catch(err => this.setState({error: err}))
+
+  }
+
+
+  handleAdd = () => {
+
+
 
   }
 
@@ -58,13 +67,14 @@ class MainView extends Component {
         }
         <h1 className="page-header">Knowledgebase Dashboard</h1>
         <h2 className="sub-header" style={{textTransform: "capitalize"}}>{currentObject.currentObject.name}</h2>
-        {isAuthenticated && 
+        {isAuthenticated &&
           <div style={{display: "inline-block"}}>
-            <Button className="pull-right" bsStyle="primary">Update</Button>
-            <Button className="pull-right" bsStyle="primary">Add</Button>
+          <ButtonToolbar>
             <Button className="pull-right" bsStyle="primary" onClick={this.handleDelete}>Delete</Button>
+            <ConceptModal />
+          </ButtonToolbar>
           </div>
-        } 
+        }
         <ControlledTabs />
 
       </div>
@@ -75,7 +85,7 @@ class MainView extends Component {
 // Get apps state and pass it as props to currentObject
 //      > whenever state changes, the currentObject will automatically re-render
 function mapStateToProps(state) {
-  
+
   const { currentObject, auth } = state
   const { isAuthenticated } = auth
   return {

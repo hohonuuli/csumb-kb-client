@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Form, FormControl, FormGroup, ControlLabel, Modal, Button } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import AlertComp from '../../components/common/alertComp';
 
 class DeleteMediaModal extends React.Component {

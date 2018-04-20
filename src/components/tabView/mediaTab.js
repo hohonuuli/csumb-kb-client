@@ -26,7 +26,7 @@ class MediaTab extends Component {
                     <Form horizontal>
                         <FormGroup controlId="formHorizontalUrl">
                             <Col componentClass={ControlLabel} sm={2}>
-                            URL: 
+                            URL:
                             </Col>
                             <Col sm={10}>
                                 <FormControl type="text" placeholder="" value={mediaItem.url} readOnly/>
@@ -59,8 +59,8 @@ class MediaTab extends Component {
                         </FormGroup>
                         <FormGroup>
                             <Col smOffset={2} sm={10}>
-                            {mediaItem.isPrimary === "true" ? 
-                                <Checkbox readOnly checked>Primary?</Checkbox> : 
+                            {mediaItem.isPrimary === "true" ?
+                                <Checkbox readOnly checked>Primary?</Checkbox> :
                                 <Checkbox readOnly>Primary?</Checkbox>
                             }
                             </Col>
