@@ -75,9 +75,8 @@ class MediaTab extends Component {
     return (
         <div>
             {this.props.isAuthenticated && 
-                <div className={"row"} style={{width: "100%", paddingRight: "33%", display: "inline-block", margin: "5px"}}>
+                <div className={"row"} style={{width: "100%", paddingRight: "46%", display: "inline-block", margin: "5px"}}>
                     <MediaModal conceptName={this.props.conceptName}/>
-                    <ConceptModal parent={this.props.conceptName}/>
                 </div>
             }
             <div>{data}</div>
