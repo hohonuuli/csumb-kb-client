@@ -6,6 +6,7 @@ import { setCurrentObject } from '../../actions/index';
 import {Treebeard, decorators} from 'react-treebeard';
 import './treeView.css';
 import style from './treeViewStyle';
+import * as filters from './filter';
 
 
 class TreeView extends Component {
@@ -13,7 +14,8 @@ class TreeView extends Component {
   constructor(props){
         super(props);
         this.state = {
-          treeData: {},
+          touchedData: {},
+          untouchedData: {},
         };
         this.onToggle = this.onToggle.bind(this);
   }
@@ -46,21 +48,31 @@ class TreeView extends Component {
     .then(res => res.json())
     .then(
       (result) => {
-        this.setState({treeData: result});
+        this.setState({touchedData: result, untouchedData:result});
       },
       (error) => {
         console.log(error);
       }
     )
   }
+  onFilterMouseUp(e){
+    const filter = e.target.value.trim();
+    if (!filter || filter.length < 4) {
+        return this.setState({touchedData: this.state.untouchedData});
+    }
+    var filtered = filters.filterTree(this.state.touchedData, filter);
+    filtered = filters.expandFilteredNodes(filtered, filter);
+    this.setState({touchedData: filtered});
+  }
   render() {
 
     return (
       <div className="col-sm-3 col-md-3 sidebar">
+        <input className="form-control" style={{marginBottom: "10px"}} onKeyUp={this.onFilterMouseUp.bind(this)} placeholder="Search" type="text"/>
         <ul className="nav nav-sidebar">
           <ul className="nav nav-list">
             <Treebeard
-                data={this.state.treeData}
+                data={this.state.touchedData}
                 onToggle={this.onToggle}
                 style={style}
                 decorators={decorators}
