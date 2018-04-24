@@ -71,7 +71,7 @@ class MainView extends Component {
           <div style={{display: "inline-block"}}>
           <ButtonToolbar>
             <Button className="pull-right" bsStyle="primary" onClick={this.handleDelete}>Delete</Button>
-            <ConceptModal />
+            <ConceptModal parent={currentObject.currentObject.name}/>
           </ButtonToolbar>
           </div>
         }

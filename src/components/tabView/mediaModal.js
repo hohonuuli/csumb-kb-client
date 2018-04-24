@@ -27,7 +27,7 @@ class MediaModal extends React.Component {
   handleSubmit(e){
     e.preventDefault();
     if(this.state.url === '' || this.state.type === '' ){
-      this.setState({error: "Empty fields"});
+      this.setState({error: "Empty fields", alertStyle: 'danger'});
     }else{
       let config = {
         method: 'POST',
