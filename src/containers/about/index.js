@@ -11,7 +11,7 @@ class About extends Component {
             <small></small>
         </h1>
         <p>Hello! We are the team behind the new MBARI knowledgebase application. 
-            This application was created in partnership between California State University, Monterey and M.B.A.R.I.
+            This application was created in partnership between California State University, Monterey and MBARI (Monterey Bay Aquarium Research Institute)
             as a computer science senior capstone project for CST 499 for the Spring 2018 semester. 
             We are graduating undergraduate computer science students with concentrations in software engineering.
             This application is powered by Spark framework as the back-end, and HTML + React JS for the front-end.</p>
