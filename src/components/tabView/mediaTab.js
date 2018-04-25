@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Checkbox, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
-import MediaModal from './mediaModal';
-import DeleteMediaModal from './deleteMediaModal';
+import MediaModal from '../common/modals/mediaModal';
+import DeleteMediaModal from '../common/modals/deleteMediaModal';
 
 class MediaTab extends Component {
   render() {

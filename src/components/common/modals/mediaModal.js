@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button, Form, FormGroup, ControlLabel, FormControl, Modal} from 'react-bootstrap';
-import AlertComp from '../../components/common/alertComp';
+import AlertComp from '../alertComp';
 
 class MediaModal extends React.Component {
   constructor(props, context) {

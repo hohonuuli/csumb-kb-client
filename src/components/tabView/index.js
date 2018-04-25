@@ -9,7 +9,7 @@ import HistoryTab from './historyTab';
 import PropTab from './propertiesTab';
 import NameTab from './nameTab';
 import TemplatesTab from './templatesTab';
-import AddName from '../tabView/addNameModal';
+import AddName from '../common/modals/addNameModal';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 
 class TabView extends Component {

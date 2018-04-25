@@ -8,8 +8,8 @@ import { setCurrentObject } from '../../actions/index';
 import './mainView.css';
 
 import TabView from '../tabView';
-import ConceptModal from '../tabView/conceptModal';
-import AddName from '../tabView/addNameModal';
+import ConceptModal from '../common/modals/conceptModal';
+import AddName from '../common/modals/addNameModal';
 
 class MainView extends Component {
   constructor(props, context) {

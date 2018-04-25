@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button, Form, Radio } from 'react-bootstrap';
 import { FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap';
-import AlertComp from '../../components/common/alertComp';
+import AlertComp from '../alertComp';
 
 
 class AddName extends React.Component {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Modal, Button } from 'react-bootstrap';
-import AlertComp from '../../components/common/alertComp';
+import AlertComp from '../alertComp';
 
 class DeleteMediaModal extends React.Component {
   constructor(props, context) {
