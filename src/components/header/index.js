@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import SearchBar from './searchBar';
 import NavItems from './navItems';
 import './header.css';
 
@@ -20,7 +19,6 @@ class Header extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <NavItems />
-          <SearchBar />
         </Navbar.Collapse>
       </Navbar>
     );

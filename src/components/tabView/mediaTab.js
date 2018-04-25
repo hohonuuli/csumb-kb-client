@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Checkbox, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
-import MediaModal from './mediaModal';
-import ConceptModal from './conceptModal';
-import deleteMediaModal from './deleteMediaModal';
-import DeleteMediaModal from './deleteMediaModal';
+import MediaModal from '../common/modals/mediaModal';
+import DeleteMediaModal from '../common/modals/deleteMediaModal';
 
 class MediaTab extends Component {
   render() {
@@ -21,7 +19,7 @@ class MediaTab extends Component {
                 return (
                     <div style={{backgroundColor: "#f5f5f5", padding: "10px", marginBottom: "10px", borderRadius: "10px"}} key={mediaItem.url + count}>
                     {this.props.isAuthenticated && 
-                        <div><DeleteMediaModal url={mediaItem.url} conceptName={this.props.conceptName}/></div>
+                        <div><DeleteMediaModal url={mediaItem.url} conceptName={this.props.conceptName} refreshConcept={this.props.refreshConcept}/></div>
                     }
                     <Form horizontal>
                         <FormGroup controlId="formHorizontalUrl">
@@ -75,9 +73,8 @@ class MediaTab extends Component {
     return (
         <div>
             {this.props.isAuthenticated && 
-                <div className={"row"} style={{width: "100%", paddingRight: "33%", display: "inline-block", margin: "5px"}}>
-                    <MediaModal conceptName={this.props.conceptName}/>
-                    <ConceptModal parent={this.props.conceptName}/>
+                <div className={"row"} style={{width: "100%", paddingRight: "46%", display: "inline-block", margin: "5px"}}>
+                    <MediaModal conceptName={this.props.conceptName} refreshConcept={this.props.refreshConcept}/>
                 </div>
             }
             <div>{data}</div>

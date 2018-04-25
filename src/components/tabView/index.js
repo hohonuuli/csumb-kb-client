@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import { setCurrentObject } from '../../actions/index';
+import { refreshConcept } from '../../actions/index';
 import { Tabs, Tab } from 'react-bootstrap';
 import MediaTab from './mediaTab';
 import HistoryTab from './historyTab';
 import PropTab from './propertiesTab';
 import NameTab from './nameTab';
 import TemplatesTab from './templatesTab';
-import AddName from '../tabView/addNameModal';
+import AddName from '../common/modals/addNameModal';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 
-class ControlledTabs extends Component {
+class TabView extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -20,7 +20,8 @@ class ControlledTabs extends Component {
     this.altNames = ""
 
     this.state = {
-      key: 1
+      key: 1,
+      objectData: null,
     };
   }
 
@@ -31,7 +32,7 @@ class ControlledTabs extends Component {
   }
 
   render() {
-    const currentObject = this.props.currentObject.currentObject;
+    var currentObject = this.props.currentObject.currentObject;
     return (
       <Tabs
         activeKey={this.state.key}
@@ -57,7 +58,7 @@ class ControlledTabs extends Component {
           <PropTab conceptName={currentObject.name} properties={currentObject.descriptors} />
         </Tab>
         <Tab eventKey={4} title="Media">
-          <MediaTab isAuthenticated={this.props.isAuthenticated} conceptName={currentObject.name} media={currentObject.media}/>
+          <MediaTab isAuthenticated={this.props.isAuthenticated} conceptName={currentObject.name} media={currentObject.media} refreshConcept={this.props.refreshConcept}/>
         </Tab>
         <Tab eventKey={5} title="History">
           <HistoryTab  isAuthenticated={this.props.isAuthenticated} history={currentObject.history} conceptName={currentObject.name}/>
@@ -70,10 +71,10 @@ class ControlledTabs extends Component {
 // Get apps state and pass it as props to currentObject
 //      > whenever state changes, the currentObject will automatically re-render
 function mapStateToProps(state) {
-  const { auth } = state
+  var { auth, currentObject } = state
   const { isAuthenticated } = auth
     return {
-        currentObject: state.currentObject,
+        currentObject: currentObject,
         isAuthenticated
     };
 }
@@ -81,7 +82,7 @@ function mapStateToProps(state) {
 // Get actions and pass them as props to to currentObject
 //      > now currentObject has this.props.currentObject
 function matchDispatchToProps(dispatch){
-    return bindActionCreators({setCurrentObject: setCurrentObject}, dispatch);
+    return bindActionCreators({refreshConcept: refreshConcept}, dispatch);
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(ControlledTabs);
+export default connect(mapStateToProps, matchDispatchToProps)(TabView);

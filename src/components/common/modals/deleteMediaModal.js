@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Modal, Button } from 'react-bootstrap';
-import AlertComp from '../../components/common/alertComp';
+import AlertComp from '../alertComp';
 
 class DeleteMediaModal extends React.Component {
   constructor(props, context) {
@@ -26,10 +26,16 @@ class DeleteMediaModal extends React.Component {
   handleShow() {
     this.setState({ show: true });
   }
+  componentWillUnmount(){
+    this.setState({show: false, error: ''})
+  }
 
 
   handleSubmit(e) {
     e.preventDefault();
+
+    var {refreshConcept} = this.props;
+
     let config = {
     method: 'POST',
     headers: { 'Content-Type':'application/json' },
@@ -48,6 +54,10 @@ class DeleteMediaModal extends React.Component {
             this.setState({error: user.message, alertStyle: 'danger'});
         } else {
             this.setState({error: "Media Item deleted", alertStyle: 'success'});
+            refreshConcept(this.props.conceptName);
+            setTimeout(() => {
+              this.handleClose()
+            }, 3000);
         }
     }).catch(err => {console.log(err); this.setState({error: err, alertStyle: 'danger'})})
   }
