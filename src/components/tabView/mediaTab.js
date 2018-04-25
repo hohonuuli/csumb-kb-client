@@ -19,7 +19,7 @@ class MediaTab extends Component {
                 return (
                     <div style={{backgroundColor: "#f5f5f5", padding: "10px", marginBottom: "10px", borderRadius: "10px"}} key={mediaItem.url + count}>
                     {this.props.isAuthenticated && 
-                        <div><DeleteMediaModal url={mediaItem.url} conceptName={this.props.conceptName}/></div>
+                        <div><DeleteMediaModal url={mediaItem.url} conceptName={this.props.conceptName} refreshConcept={this.props.refreshConcept}/></div>
                     }
                     <Form horizontal>
                         <FormGroup controlId="formHorizontalUrl">
@@ -74,7 +74,7 @@ class MediaTab extends Component {
         <div>
             {this.props.isAuthenticated && 
                 <div className={"row"} style={{width: "100%", paddingRight: "46%", display: "inline-block", margin: "5px"}}>
-                    <MediaModal conceptName={this.props.conceptName}/>
+                    <MediaModal conceptName={this.props.conceptName} refreshConcept={this.props.refreshConcept}/>
                 </div>
             }
             <div>{data}</div>

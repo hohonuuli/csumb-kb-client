@@ -7,7 +7,8 @@ import Dashboard from '../dashboard';
 import Login from '../login';
 import Profile from '../profile';
 import NotFound from '../notFound';
-
+ 
+//Main React app container is in charge of the header navbar and switch components based on route
 class App extends Component {
   render() {
     return (

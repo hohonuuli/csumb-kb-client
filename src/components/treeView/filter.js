@@ -1,8 +1,6 @@
 //Based off: http://alexcurtis.github.io/react-treebeard/
 //Source from: https://github.com/alexcurtis/react-treebeard/blob/master/example/filter.js
 
-'use strict';
-
 // Helper functions for filtering
 export const defaultMatcher = (filterText, node) => {
     return node.name.toLowerCase().indexOf(filterText.toLowerCase()) !== -1;

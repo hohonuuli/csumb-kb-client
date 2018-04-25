@@ -7,7 +7,7 @@ import AlertComp from '../../components/common/alertComp';
 import { setCurrentObject } from '../../actions/index';
 import './mainView.css';
 
-import ControlledTabs from '../tabView/tab';
+import TabView from '../tabView';
 import ConceptModal from '../tabView/conceptModal';
 import AddName from '../tabView/addNameModal';
 
@@ -58,24 +58,25 @@ class MainView extends Component {
   }
 
   render() {
-    var {isAuthenticated, currentObject} = this.props;
+    var {isAuthenticated} = this.props;
     const { error } = this.state;
+    var currentObject = this.props.currentObject.currentObject;
     return (
       <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
         {error &&
           <AlertComp show={true} message={error}/>
         }
         <h1 className="page-header">Knowledgebase Dashboard</h1>
-        <h2 className="sub-header" style={{textTransform: "capitalize"}}>{currentObject.currentObject.name}</h2>
+        <h2 className="sub-header" style={{textTransform: "capitalize"}}>{currentObject.name}</h2>
         {isAuthenticated &&
           <div style={{display: "inline-block"}}>
           <ButtonToolbar>
             <Button className="pull-right" bsStyle="primary" onClick={this.handleDelete}>Delete</Button>
-            <ConceptModal parent={currentObject.currentObject.name}/>
+            <ConceptModal parent={currentObject.name}/>
           </ButtonToolbar>
           </div>
         }
-        <ControlledTabs />
+        <TabView />
 
       </div>
 

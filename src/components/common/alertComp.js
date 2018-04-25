@@ -26,7 +26,7 @@ class AlertComp extends Component {
   }
   render() {
     if(this.state.show){
-      setTimeout(this.handleDismiss, 3000);
+      setTimeout(this.handleDismiss, 2000);
       return (
         <div style={{width: "80%", margin: "0 auto"}}>
         <Alert bsStyle={this.props.bsStyle} onDismiss={this.handleDismiss}>

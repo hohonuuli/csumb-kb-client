@@ -4,9 +4,17 @@ export const setCurrentObject = (data) => {
       currentObject: data
   }
 };
-export const setConceptNames = (data) => {
-  return {
-    type: 'SET_CONCEPT_NAMES',
-    conceptNames: data
-  }
+export function refreshConcept(conceptName){
+  return dispatch => {
+    fetch("http://localhost:4567/getMetadata/" + conceptName)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        dispatch(setCurrentObject(result));
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  };
 }
