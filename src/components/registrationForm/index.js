@@ -30,7 +30,9 @@ class RegistrationForm extends Component {
       [e.target.id]: e.target.value
     });
   }
-
+  componentWillUnmount(){
+    this.setState({alertStyle: '', error: ''})
+  }
   handleSubmit(e){
     e.preventDefault();
     if(this.state.password === '' || this.state.username === '' || this.state.firstName === '' || 

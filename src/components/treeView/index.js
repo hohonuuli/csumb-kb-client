@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import { setCurrentObject } from '../../actions/index';
+import { refreshConcept } from '../../actions/index';
 import {Treebeard, decorators} from 'react-treebeard';
 import './treeView.css';
 import style from './treeViewStyle';
@@ -21,26 +21,13 @@ class TreeView extends Component {
   }
 
   onToggle(node, toggled){
-        let config = {
-          method: 'GET',
-          headers: { 'Content-Type':'application/json' },
-        }
-        if(this.state.cursor){this.state.cursor.active = false;}
-        node.active = true;
-        if(node.children){ node.toggled = toggled; }
-        this.setState({ cursor: node });
+    if(this.state.cursor){this.state.cursor.active = false;}
+    node.active = true;
+    if(node.children){ node.toggled = toggled; }
+    this.setState({ cursor: node });
 
-        var nodeName = encodeURIComponent((node.name).trim());
-        fetch("http://localhost:4567/getMetadata/" + nodeName, config)
-        .then(res => res.json())
-        .then(
-          (result) => {
-            this.props.setCurrentObject(result);
-          },
-          (error) => {
-            console.log(error);
-          }
-        )
+    var nodeName = encodeURIComponent((node.name).trim());
+    this.props.refreshConcept(nodeName)
   }
 
   componentWillMount(){
@@ -95,7 +82,7 @@ function mapStateToProps(state) {
 // Get actions and pass them as props to to currentObject
 //      > now currentObject has this.props.currentObject
 function matchDispatchToProps(dispatch){
-    return bindActionCreators({setCurrentObject: setCurrentObject}, dispatch);
+    return bindActionCreators({refreshConcept: refreshConcept}, dispatch);
 }
 
 decorators.Header = ({style, node}) => {

@@ -24,9 +24,11 @@ class AlertComp extends Component {
   componentWillUnmount(){
     this.setState({show: false, error: ''})
   }
+  componentWillMount(){
+    setTimeout(this.handleDismiss, 2000);
+  }
   render() {
     if(this.state.show){
-      setTimeout(this.handleDismiss, 2000);
       return (
         <div style={{width: "80%", margin: "0 auto"}}>
         <Alert bsStyle={this.props.bsStyle} onDismiss={this.handleDismiss}>
