@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 
 import AlertComp from '../../components/common/alertComp';
-import { setCurrentObject } from '../../actions/index';
+import { refreshConcept } from '../../actions/index';
 import './mainView.css';
 
 import TabView from '../tabView';
@@ -20,16 +20,7 @@ class MainView extends Component {
     };
   }
   componentWillMount(){
-    fetch("http://localhost:4567/getMetadata/object")
-    .then(res => res.json())
-    .then(
-      (result) => {
-        this.props.setCurrentObject(result);
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
+    this.props.refreshConcept();
   }
 
   handleDelete = () => {
@@ -97,7 +88,7 @@ function mapStateToProps(state) {
 // Get actions and pass them as props to to currentObject
 //      > now currentObject has this.props.currentObject
 function matchDispatchToProps(dispatch){
-    return bindActionCreators({setCurrentObject: setCurrentObject}, dispatch);
+    return bindActionCreators({refreshConcept: refreshConcept}, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(MainView);

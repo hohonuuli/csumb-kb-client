@@ -6,7 +6,7 @@ export const setCurrentObject = (data) => {
 };
 export function refreshConcept(conceptName){
   return dispatch => {
-    fetch("http://localhost:4567/getMetadata/" + conceptName)
+    fetch("http://localhost:4567/getMetadata/" + (conceptName? conceptName : 'object'))
     .then(res => res.json())
     .then(
       (result) => {
