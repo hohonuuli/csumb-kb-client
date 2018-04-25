@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import { setCurrentObject } from '../../actions/index';
+import { refreshConcept } from '../../actions/index';
 import {Treebeard, decorators} from 'react-treebeard';
 import './treeView.css';
 import style from './treeViewStyle';
+import * as filters from './filter';
 
 
 class TreeView extends Component {
@@ -13,32 +14,20 @@ class TreeView extends Component {
   constructor(props){
         super(props);
         this.state = {
-          treeData: {},
+          touchedData: {},
+          untouchedData: {},
         };
         this.onToggle = this.onToggle.bind(this);
   }
 
   onToggle(node, toggled){
-        let config = {
-          method: 'GET',
-          headers: { 'Content-Type':'application/json' },
-        }
-        if(this.state.cursor){this.state.cursor.active = false;}
-        node.active = true;
-        if(node.children){ node.toggled = toggled; }
-        this.setState({ cursor: node });
+    if(this.state.cursor){this.state.cursor.active = false;}
+    node.active = true;
+    if(node.children){ node.toggled = toggled; }
+    this.setState({ cursor: node });
 
-        var nodeName = encodeURIComponent((node.name).trim());
-        fetch("http://localhost:4567/getMetadata/" + nodeName, config)
-        .then(res => res.json())
-        .then(
-          (result) => {
-            this.props.setCurrentObject(result);
-          },
-          (error) => {
-            console.log(error);
-          }
-        )
+    var nodeName = encodeURIComponent((node.name).trim());
+    this.props.refreshConcept(nodeName)
   }
 
   componentWillMount(){
@@ -46,21 +35,31 @@ class TreeView extends Component {
     .then(res => res.json())
     .then(
       (result) => {
-        this.setState({treeData: result});
+        this.setState({touchedData: result, untouchedData:result});
       },
       (error) => {
         console.log(error);
       }
     )
   }
+  onFilterMouseUp(e){
+    const filter = e.target.value.trim();
+    if (!filter || filter.length < 4) {
+        return this.setState({touchedData: this.state.untouchedData});
+    }
+    var filtered = filters.filterTree(this.state.touchedData, filter);
+    filtered = filters.expandFilteredNodes(filtered, filter);
+    this.setState({touchedData: filtered});
+  }
   render() {
 
     return (
       <div className="col-sm-3 col-md-3 sidebar">
+        <input className="form-control" style={{marginBottom: "10px"}} onKeyUp={this.onFilterMouseUp.bind(this)} placeholder="Search" type="text"/>
         <ul className="nav nav-sidebar">
           <ul className="nav nav-list">
             <Treebeard
-                data={this.state.treeData}
+                data={this.state.touchedData}
                 onToggle={this.onToggle}
                 style={style}
                 decorators={decorators}
@@ -83,7 +82,7 @@ function mapStateToProps(state) {
 // Get actions and pass them as props to to currentObject
 //      > now currentObject has this.props.currentObject
 function matchDispatchToProps(dispatch){
-    return bindActionCreators({setCurrentObject: setCurrentObject}, dispatch);
+    return bindActionCreators({refreshConcept: refreshConcept}, dispatch);
 }
 
 decorators.Header = ({style, node}) => {

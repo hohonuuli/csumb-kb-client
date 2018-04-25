@@ -81,7 +81,7 @@ export function loginUser(creds) {
 
             dispatch(receiveLogin(user))
         }
-      }).catch(err => console.log("Error: ", err))
+      }).catch(err => dispatch(loginError(err)))
   }
 }
 

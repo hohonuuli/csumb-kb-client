@@ -31,7 +31,10 @@ class NavItems extends Component {
         <LinkContainer to="/settings">
           <NavItem>Settings</NavItem>
         </LinkContainer>
-        } 
+        }
+        <LinkContainer to ="/about">
+          <NavItem>About</NavItem>
+        </LinkContainer>
         {logButton}
       </Nav>
     );

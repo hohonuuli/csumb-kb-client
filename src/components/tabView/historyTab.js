@@ -32,7 +32,9 @@ class HistoryTab extends Component {
         }
     }
     return (
-        <div>{data}</div>
+        <div>
+            <div>{data}</div>
+        </div>
     );
   }
 }
