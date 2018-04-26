@@ -16,6 +16,18 @@ class MediaTab extends Component {
             var count = 0;
             data = media.map(mediaItem => {
                 count++;
+                var mediaObject;
+                if(mediaItem.type === 'Image'){
+                    mediaObject = <img style={{display: "block", width: "250px", margin: "0 auto"}} src={mediaItem.url} alt={mediaItem.caption}/>
+                }else if(mediaItem.type === 'Icon'){
+                    mediaObject = <img style={{display: "block", width: "50px", margin: "0 auto"}} src={mediaItem.url} alt={mediaItem.caption}/>
+                }else{
+                    mediaObject = (
+                                <video width={320} height={240} controls style={{display: "block", margin: "0 auto"}} >
+                                    <source src={mediaItem.url} type={"video/mp4"} />
+                                    Your browser does not support the video tag.
+                                </video> )
+                }
                 return (
                     <div style={{backgroundColor: "#f5f5f5", padding: "10px", marginBottom: "10px", borderRadius: "10px"}} key={mediaItem.url + count}>
                     {this.props.isAuthenticated && 
@@ -64,7 +76,7 @@ class MediaTab extends Component {
                             </Col>
                         </FormGroup>
                     </Form>
-                    <img style={{display: "block", width: "250px", margin: "0 auto"}} src={mediaItem.url} alt={mediaItem.caption}/>
+                    {mediaObject}
                     </div>
                 );
             });

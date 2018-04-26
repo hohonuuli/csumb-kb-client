@@ -9,8 +9,6 @@ import HistoryTab from './historyTab';
 import PropTab from './propertiesTab';
 import NameTab from './nameTab';
 import TemplatesTab from './templatesTab';
-import AddName from '../common/modals/addNameModal';
-import { Button, ButtonToolbar } from 'react-bootstrap';
 
 class TabView extends Component {
   constructor(props, context) {
@@ -34,22 +32,9 @@ class TabView extends Component {
   render() {
     var currentObject = this.props.currentObject.currentObject;
     return (
-      <Tabs
-        activeKey={this.state.key}
-        onSelect={this.handleSelect}
-        id="controlled-tab-example"
-      >
+      <Tabs activeKey={this.state.key} onSelect={this.handleSelect} id="controlled-tab-example">
         <Tab eventKey={1} title="Names">
-            {this.props.isAuthenticated &&
-              <div>
-                <ButtonToolbar>
-                  <Button className="pull-right" bsStyle="primary" bsSize="sm">Update</Button>
-                  <AddName conceptName={currentObject.name}/>
-                </ButtonToolbar>
-              </div>
-            }
-          <h3 style={{textTransform: "capitalize"}}>{currentObject.name}</h3>
-          <NameTab conceptName={currentObject.name} alternates={currentObject.alternateNames} isAuthenticated={this.props.isAuthenticated} />
+          <NameTab conceptName={currentObject.name} alternates={currentObject.alternatives} isAuthenticated={this.props.isAuthenticated} refreshConcept={this.props.refreshConcept}/>
         </Tab>
         <Tab eventKey={2} title="Templates">
           <TemplatesTab templates={currentObject.alternateNames} />

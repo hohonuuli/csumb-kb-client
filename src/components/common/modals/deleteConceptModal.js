@@ -3,13 +3,14 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import AlertComp from '../alertComp';
 
-class DeleteMediaModal extends React.Component {
+class DeleteConceptModal extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     this.state = {
       show: false,
@@ -26,24 +27,23 @@ class DeleteMediaModal extends React.Component {
   handleShow() {
     this.setState({ show: true });
   }
-  componentWillUnmount(){
-    this.setState({show: false, error: ''})
-  }
 
+  handleChange(e){
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+  }
 
   handleSubmit(e) {
     e.preventDefault();
-
-    var {refreshConcept} = this.props;
-
     let config = {
-    method: 'POST',
+    method: 'DELETE',
     headers: { 'Content-Type':'application/json' },
     }
 
-    var fetchString = 'http://localhost:4567/deleteConceptMedia/' + this.props.conceptName + "?url=" + this.props.url +
-    '&jwt=' + sessionStorage.getItem('access_token') + "&userName=" + sessionStorage.getItem("access_username");
-    
+    var fetchString = 'http://localhost:4567/deleteConcept/' + this.props.conceptName +
+    '?jwt=' + sessionStorage.getItem('access_token') + "&userName=" + sessionStorage.getItem("access_username");
+
     fetch(fetchString, config)
     .then(response =>
         response.json().then(user => ({ user, response }))
@@ -53,32 +53,28 @@ class DeleteMediaModal extends React.Component {
         } else if(user.code === "401") {
             this.setState({error: user.message, alertStyle: 'danger'});
         } else {
-            this.setState({error: "Media Item deleted", alertStyle: 'success'});
-            refreshConcept(this.props.conceptName);
-            setTimeout(() => {
-              this.handleClose()
-            }, 3000);
+            this.setState({error: "Concept deleted", alertStyle: 'success'});
         }
     }).catch(err => {console.log(err); this.setState({error: err, alertStyle: 'danger'})})
   }
 
   render() {
     return (
-      <div style={{paddingBottom: "40px"}}>
+      <div>
         <Button bsStyle="danger" className="pull-right" bsSize="sm" onClick={this.handleShow}>
-          Delete
+          Delete Concept
         </Button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Delete selected item?</Modal.Title>
+            <Modal.Title>Delete concept?</Modal.Title>
           </Modal.Header>
           {this.state.error &&
             <AlertComp show={true} bsStyle={this.state.alertStyle} message={this.state.error}/>
           }
           <Modal.Footer>
             <Button onClick={this.handleClose}>No</Button>
-            <Button bsStyle="primary" onClick={this.handleSubmit}>Yes</Button>
+            <Button bsStyle="danger" onClick={this.handleSubmit}>Delete</Button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -86,4 +82,4 @@ class DeleteMediaModal extends React.Component {
   }
 }
 
-export default DeleteMediaModal;
+export default DeleteConceptModal;

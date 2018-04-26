@@ -3,7 +3,7 @@ import React from 'react';
 import { Form, FormControl, FormGroup, ControlLabel, Modal, Button } from 'react-bootstrap';
 import AlertComp from '../alertComp';
 
-class ConceptModal extends React.Component {
+class AddConceptModal extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -44,7 +44,7 @@ class ConceptModal extends React.Component {
         headers: { 'Content-Type':'application/json' },
       }
 
-      var fetchString = 'http://localhost:4567/createConcept/' + this.state.conceptName + "?parent=" + this.props.parent +
+      var fetchString = 'http://localhost:4567/createConcept/' + this.state.conceptName + "?parent=" + this.props.parentConcept +
       '&jwt=' + sessionStorage.getItem('access_token') + "&userName=" + sessionStorage.getItem("access_username");
 
       fetch(fetchString, config)
@@ -56,7 +56,7 @@ class ConceptModal extends React.Component {
           } else if(user.code === "401") {
               this.setState({error: user.message, alertStyle: 'danger'});
           } else {
-              this.setState({error: "Name added to concept", alertStyle: 'success'});
+              this.setState({error: "Concept added", alertStyle: 'success'});
           }
         }).catch(err => {console.log(err); this.setState({error: err, alertStyle: 'danger'})})
     }
@@ -64,8 +64,8 @@ class ConceptModal extends React.Component {
 
   render() {
     return (
-      <div style={{display: "inline-block"}}>
-        <Button bsStyle="primary" className="pull-right" onClick={this.handleShow}>
+      <div>
+        <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
           Add new concept
         </Button>
 
@@ -85,7 +85,7 @@ class ConceptModal extends React.Component {
               <FormControl
                 type="text"
                 name="name"
-                placeholder="Enter name"
+                placeholder="Enter concept name"
                 onChange={this.handleChange}
               />
             </FormGroup>
@@ -101,4 +101,4 @@ class ConceptModal extends React.Component {
   }
 }
 
-export default ConceptModal;
+export default AddConceptModal;
