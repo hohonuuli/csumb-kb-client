@@ -26,7 +26,6 @@ class NameTab extends Component {
     }
     return (
         <div>
-
             {altName}
         </div>
     );

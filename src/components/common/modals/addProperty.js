@@ -5,7 +5,7 @@ import { FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap';
 import AlertComp from '../alertComp';
 
 
-class AddName extends React.Component {
+class AddProperty extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -15,9 +15,9 @@ class AddName extends React.Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-        newName: '',
-        userAcc: '',
-        type: '',
+        toConcept: '',
+        linkName: '',
+        linkValue: '',
         error: '',
         alertStyle: '',
     };
@@ -26,6 +26,7 @@ class AddName extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
+    var {refreshConcept} = this.props;
     if(this.state.newName === '' ){
       this.setState({error: "Empty fields"});
     }else{
@@ -34,8 +35,9 @@ class AddName extends React.Component {
         headers: { 'Content-Type':'application/json' },
       }
 
-      var fetchString = 'http://localhost:4567/addConceptName/' + this.props.conceptName +
-      '?type=' + this.state.type + '&conceptName=' + this.state.newName + '&jwt=' + sessionStorage.getItem('access_token')
+      var fetchString = 'http://localhost:4567/addLinkRealizations' + '?concept=' + this.props.conceptName + '&toConcept=self' + '&linkName='+ this.state.linkName
+      + '&linkValue=' + this.state.linkValue +
+      '&jwt=' + sessionStorage.getItem('access_token')
       + "&userName=" + sessionStorage.getItem("access_username");
       fetch(fetchString, config)
         .then(response =>
@@ -46,7 +48,11 @@ class AddName extends React.Component {
           } else if(user.code === "401") {
               this.setState({error: user.message, alertStyle: 'danger'});
           } else {
-              this.setState({error: "Name was added.", alertStyle: 'success'});
+              this.setState({error: "Property was added.", alertStyle: 'success'});
+              refreshConcept(this.props.conceptName);
+              setTimeout(() => {
+                this.handleClose()
+              }, 3000);
           }
         }).catch(err => this.setState({error: err, alertStyle: 'danger'}))
     }
@@ -70,11 +76,11 @@ class AddName extends React.Component {
     return (
       <div>
         <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
-          Add Name
+          Add property
         </Button>
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title style={{textTransform: "capitalize"}}>{this.props.conceptName}</Modal.Title>
+            <Modal.Title style={{textTransform: "capitalize"}}>Add property: {this.props.conceptName}</Modal.Title>
           </Modal.Header>
             {this.state.error &&
                 <AlertComp show={true} bsStyle={this.state.alertStyle} message={this.state.error}/>
@@ -82,18 +88,18 @@ class AddName extends React.Component {
           <Modal.Body style={{padding: "0 30px 0 30px"}}>
 
             <Form horizontal>
-                <FormGroup controlId="newName" >
-                    <ControlLabel>Name: </ControlLabel>
-                    <FormControl type="text" name="newName" placeholder="Name" onChange={this.handleChange} />
+                <FormGroup controlId="linkName" >
+                    <ControlLabel>Link: </ControlLabel>
+                    <FormControl type="text" name="linkName" placeholder="Name" onChange={this.handleChange} />
                 </FormGroup>
-                <FormGroup controlId="applyTo" >
-                    <ControlLabel>Concept to apply to: </ControlLabel>
-                    <FormControl type="text" name="applyTo" placeholder={this.props.conceptName} onChange={this.handleChange} readOnly/>
+                <FormGroup controlId="toConcept" >
+                    <ControlLabel>To: </ControlLabel>
+                    <FormControl type="text" name="toConcept" placeholder="self" onChange={this.handleChange} readOnly/>
                 </FormGroup>
-                <ControlLabel>Type:    </ControlLabel>
-                <Radio name="radioGroup" value="common" onChange={this.handleChange} inline>  Common</Radio>
-                <Radio name="radioGroup" value="synonym" onChange={this.handleChange} inline>Synonym</Radio>
-                <Radio name="radioGroup" value="former" onChange={this.handleChange} inline>Former</Radio>
+                <FormGroup controlId="linkValue" >
+                    <ControlLabel>Value: </ControlLabel>
+                    <FormControl type="text" name="linkValue" placeholder="Value" onChange={this.handleChange}/>
+                </FormGroup>
             </Form>
           </Modal.Body>
           <Modal.Footer>
@@ -106,4 +112,4 @@ class AddName extends React.Component {
   }
 }
 
-export default AddName;
+export default AddProperty;

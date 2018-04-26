@@ -55,7 +55,7 @@ class TabView extends Component {
           <TemplatesTab templates={currentObject.alternateNames} />
         </Tab>
         <Tab eventKey={3} title="Properties">
-          <PropTab conceptName={currentObject.name} properties={currentObject.descriptors} />
+          <PropTab conceptName={currentObject.name} properties={currentObject.descriptors} refreshConcept={this.props.refreshConcept} />
         </Tab>
         <Tab eventKey={4} title="Media">
           <MediaTab isAuthenticated={this.props.isAuthenticated} conceptName={currentObject.name} media={currentObject.media} refreshConcept={this.props.refreshConcept}/>
