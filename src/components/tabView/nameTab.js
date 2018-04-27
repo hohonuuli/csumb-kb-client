@@ -22,8 +22,13 @@ class NameTab extends Component {
                 {alternates.map(altItem => {
                     count++;
                     return (
-                        <div style={{backgroundColor: "#f5f5f5", padding: "5px", marginBottom: "5px", borderRadius: "5px", height: "40px"}} key={count}>
-                            <strong>Type: {altItem.Type}</strong> - <strong>{altItem.Name}</strong>
+                        <div style={{backgroundColor: "#f5f5f5", padding: "5px", 
+                        marginBottom: "5px", borderRadius: "5px", height: "40px", 
+                        width: "80%", margin: "5px auto"}} 
+                        key={count}>
+                            <span>Name: </span>
+                            <strong style={{marginRight: "40px"}}>{altItem.Name}</strong>
+                            <span>Type: <strong>{altItem.Type}</strong></span>
                             {this.props.isAuthenticated &&
                                 <UpdateConceptNameModal parentConcept={this.props.conceptName} conceptName={altItem.Name} refreshConcept={this.props.refreshConcept}/>
                             }
@@ -45,7 +50,8 @@ class NameTab extends Component {
                 </div>
               </div>
             }
-            <h3 style={{textTransform: "capitalize"}}>{this.props.conceptName}</h3>
+            <h3 style={{textTransform: "capitalize"}}>Primary name: {this.props.conceptName}</h3>
+            <h4>All other names:</h4>
             {altNames}
         </div>
     );
