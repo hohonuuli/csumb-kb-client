@@ -59,7 +59,7 @@ class DeleteMediaModal extends React.Component {
               this.handleClose()
             }, 3000);
         }
-    }).catch(err => {console.log(err); this.setState({error: err, alertStyle: 'danger'})})
+    }).catch(err => {this.setState({error: 'Unknown error: Try again', alertStyle: 'danger'})})
   }
 
   render() {

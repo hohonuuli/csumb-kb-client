@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AddNameModal from '../common/modals/addNameModal';
 import DeleteConceptModal from '../common/modals/deleteConceptModal';
 import AddConceptModal from '../common/modals/addConceptModal';
+import ChangeParentModal from '../common/modals/changeParentModal';
 import UpdateConceptNameModal from '../common/modals/updateConceptNameModal';
 
 class NameTab extends Component {
@@ -43,10 +44,11 @@ class NameTab extends Component {
         <div>
             {this.props.isAuthenticated &&
               <div>
-                <div className={"row"} style={{width: "100%", paddingRight: "35%", display: "inline-block", margin: "5px"}}>
-                    <AddNameModal style={{marginLeft: '10px'}} conceptName={this.props.conceptName} refreshConcept={this.props.refreshConcept}/>
-                    <DeleteConceptModal style={{marginLeft: '10px'}} conceptName={this.props.conceptName} />
-                    <AddConceptModal parentConcept={this.props.conceptName}/>
+                <div className={"row"} style={{width: "98%", display: "inline-block", margin: "5px"}}>
+                    <DeleteConceptModal conceptName={this.props.conceptName} />
+                    <AddConceptModal parentConcept={this.props.conceptName} />
+                    <ChangeParentModal conceptName={this.props.conceptName} />
+                    <AddNameModal conceptName={this.props.conceptName} refreshConcept={this.props.refreshConcept}/>
                 </div>
               </div>
             }

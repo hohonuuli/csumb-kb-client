@@ -58,7 +58,7 @@ class MediaModal extends React.Component {
               }, 3000);
 
           }
-        }).catch(err => this.setState({error: err, alertStyle: 'danger'}))
+        }).catch(err => this.setState({error: 'Unknown error: Try again', alertStyle: 'danger'}))
     }
   }
   handleChange(e){

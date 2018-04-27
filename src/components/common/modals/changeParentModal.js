@@ -3,7 +3,7 @@ import React from 'react';
 import { Form, FormControl, FormGroup, ControlLabel, Modal, Button } from 'react-bootstrap';
 import AlertComp from '../alertComp';
 
-class AddConceptModal extends React.Component {
+class ChangeParentModal extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -14,7 +14,7 @@ class AddConceptModal extends React.Component {
 
     this.state = {
       show: false,
-      conceptName: '',
+      parentName: '',
       error: '',
       alertStyle: '',
     };
@@ -36,7 +36,7 @@ class AddConceptModal extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if(this.state.conceptName === '' ){
+    if(this.state.parentName === '' ){
       this.setState({error: "Enter a name", alertStyle: 'danger'});
     }else{
       let config = {
@@ -44,8 +44,8 @@ class AddConceptModal extends React.Component {
         headers: { 'Content-Type':'application/json' },
       }
 
-      var fetchString = 'http://localhost:4567/createConcept/' + this.state.conceptName + "?parent=" + this.props.parentConcept +
-      '&jwt=' + sessionStorage.getItem('access_token') + "&userName=" + sessionStorage.getItem("access_username");
+      var fetchString = 'http://localhost:4567/changeParent' + "?newParent=" + this.state.parentName +
+      '&concept=' + this.props.conceptName + '&jwt=' + sessionStorage.getItem('access_token') + "&userName=" + sessionStorage.getItem("access_username");
 
       fetch(fetchString, config)
         .then(response =>
@@ -56,7 +56,7 @@ class AddConceptModal extends React.Component {
           } else if(user.code === "401") {
               this.setState({error: user.message, alertStyle: 'danger'});
           } else {
-              this.setState({error: "Concept added", alertStyle: 'success'});
+              this.setState({error: "Parent changed", alertStyle: 'success'});
               setTimeout(() => {
                 this.handleClose()
               }, 3000);
@@ -64,17 +64,21 @@ class AddConceptModal extends React.Component {
         }).catch(err => {this.setState({error: 'Unknown error: Try again', alertStyle: 'danger'})})
     }
   }
+  
+  componentWillUnmount(){
+    this.setState({error: '', alertStyle: ''})
+  }
 
   render() {
     return (
       <div>
         <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
-          Add new concept
+          Change Parent
         </Button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>New concept</Modal.Title>
+            <Modal.Title>Change parent concept</Modal.Title>
           </Modal.Header>
           {this.state.error &&
             <AlertComp show={true} bsStyle={this.state.alertStyle} message={this.state.error}/>
@@ -82,13 +86,13 @@ class AddConceptModal extends React.Component {
           <Modal.Body>
           <Form>
             <FormGroup
-              controlId="conceptName"
+              controlId="parentName"
             >
               <ControlLabel>Concept Name</ControlLabel>
               <FormControl
                 type="text"
-                name="name"
-                placeholder="Enter concept name"
+                name="parent"
+                placeholder="Enter new parent"
                 onChange={this.handleChange}
               />
             </FormGroup>
@@ -104,4 +108,4 @@ class AddConceptModal extends React.Component {
   }
 }
 
-export default AddConceptModal;
+export default ChangeParentModal;

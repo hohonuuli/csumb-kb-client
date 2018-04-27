@@ -54,8 +54,11 @@ class DeleteConceptModal extends React.Component {
             this.setState({error: user.message, alertStyle: 'danger'});
         } else {
             this.setState({error: "Concept deleted", alertStyle: 'success'});
+            setTimeout(() => {
+                this.handleClose()
+            }, 3000);
         }
-    }).catch(err => {console.log(err); this.setState({error: err, alertStyle: 'danger'})})
+    }).catch(err => {this.setState({error: 'Unknown error: Try again', alertStyle: 'danger'})})
   }
 
   render() {

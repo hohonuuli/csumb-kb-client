@@ -51,7 +51,7 @@ class AddNameModal extends React.Component {
                 this.handleClose()
               }, 3000);
           }
-        }).catch(err => console.log(err))
+        }).catch(err => this.setState({error: 'Unknown error: Try again', alertStyle: 'danger'}))
     }
   }
 
@@ -69,12 +69,12 @@ class AddNameModal extends React.Component {
     this.setState({ show: true });
   }
   componentWillUnmount(){
-    this.setState({error: ''})
+    this.setState({error: '', alertStyle: ''})
   }
   render() {
     return (
       <div>
-        <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
+        <Button bsStyle="primary" className="pull-left" bsSize="sm" onClick={this.handleShow}>
           Add Name
         </Button>
         <Modal show={this.state.show} onHide={this.handleClose}>

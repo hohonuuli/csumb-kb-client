@@ -54,7 +54,7 @@ class UpdateConceptNameModal extends Component {
                 this.handleClose()
               }, 3000);
           }
-        }).catch(err => JSON.stringify(err))
+        }).catch(err => this.setState({error: 'Unknown error: Try again', alertStyle: 'danger'}))
     }
   }
 
