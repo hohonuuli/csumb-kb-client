@@ -26,10 +26,10 @@ class DeleteMediaModal extends React.Component {
   handleShow() {
     this.setState({ show: true });
   }
+  
   componentWillUnmount(){
-    this.setState({show: false, error: ''})
-  }
-
+    this.setState({bsStyle: '', error: ''})
+  } 
 
   handleSubmit(e) {
     e.preventDefault();
@@ -64,7 +64,7 @@ class DeleteMediaModal extends React.Component {
 
   render() {
     return (
-      <div style={{paddingBottom: "40px"}}>
+      <div>
         <Button bsStyle="danger" className="pull-right" bsSize="sm" onClick={this.handleShow}>
           Delete
         </Button>

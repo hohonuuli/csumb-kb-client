@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Checkbox, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 import MediaModal from '../common/modals/mediaModal';
 import DeleteMediaModal from '../common/modals/deleteMediaModal';
+import UpdateMediaModal from '../common/modals/updateMediaModal';
+
 
 class MediaTab extends Component {
   render() {
@@ -31,7 +33,10 @@ class MediaTab extends Component {
                 return (
                     <div style={{backgroundColor: "#f5f5f5", padding: "10px", marginBottom: "10px", borderRadius: "10px"}} key={mediaItem.url + count}>
                     {this.props.isAuthenticated && 
-                        <div><DeleteMediaModal url={mediaItem.url} conceptName={this.props.conceptName} refreshConcept={this.props.refreshConcept}/></div>
+                        <div className={"row"} style={{width: "98%", display: "inline-block", margin: "5px"}}>
+                            <DeleteMediaModal url={mediaItem.url} conceptName={this.props.conceptName} refreshConcept={this.props.refreshConcept}/>
+                            <UpdateMediaModal mediaItem={mediaItem} conceptName={this.props.conceptName} refreshConcept={this.props.refreshConcept}/>
+                        </div>
                     }
                     <Form horizontal>
                         <FormGroup controlId="formHorizontalUrl">
