@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 
-import {Button, ButtonToolbar, MenuItem, DropdownButton } from 'react-bootstrap';
+import {Button, Checkbox, ButtonToolbar, MenuItem, DropdownButton } from 'react-bootstrap';
 import AddProperty from '../common/modals/addProperty';
 
 
@@ -10,9 +10,11 @@ class PropTab extends Component {
     super(props, context);
 
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
 
     this.state = {
-      selectedProperty: ''
+      selectedProperty: '',
+      checked: false
     };
 
   }
@@ -20,6 +22,11 @@ class PropTab extends Component {
   handleSelect(eventKey){
     this.setState({selectedProperty: eventKey});
     console.log(eventKey)
+  }
+
+  handleCheck(){
+    this.setState({checked: true});
+    console.log("checked")
   }
 
   render() {
@@ -37,7 +44,8 @@ class PropTab extends Component {
                 return (
                     <div style={{backgroundColor: "#f5f5f5", padding: "10px", marginBottom: "10px", borderRadius: "10px"}} key={count}>
                     <Form horizontal>
-                   <FormGroup controlId="formHorizontalUrl">
+                    <Checkbox onChange={this.handleCheck} inline>{'  '}</Checkbox>
+                    <FormGroup controlId="formHorizontalUrl">
                        <Col componentClass={ControlLabel} sm={2}>
                        Link:
                        </Col>
@@ -45,7 +53,6 @@ class PropTab extends Component {
                            <FormControl type="text" placeholder="" value={propertyItem.linkName} readOnly/>
                        </Col>
                    </FormGroup>
-
                    <FormGroup controlId="formHorizontalCaption">
                        <Col componentClass={ControlLabel} sm={2}>
                        To:
@@ -75,7 +82,7 @@ class PropTab extends Component {
             <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
               Update
             </Button>
-            <AddProperty conceptName={this.props.conceptName} properties={this.props.properties} refreshConcept={this.props.refreshConcept}/>
+               <AddProperty conceptName={this.props.conceptName} properties={this.props.properties} refreshConcept={this.props.refreshConcept}/>
             </ButtonToolbar>
             {data}
         </div>
