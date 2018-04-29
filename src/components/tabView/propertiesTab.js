@@ -60,9 +60,6 @@ class PropTab extends Component {
         <div>
           {this.props.isAuthenticated &&
           <ButtonToolbar>
-            <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
-              Update
-            </Button>
                <AddProperty conceptName={this.props.conceptName} properties={this.props.properties} refreshConcept={this.props.refreshConcept}/>
             </ButtonToolbar>
           }

@@ -67,6 +67,9 @@ class DeleteProperty extends React.Component {
         <Button bsStyle="danger" className="pull-right" bsSize="sm" onClick={this.handleShow}>
           Delete
         </Button>
+        <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
+          Update
+        </Button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
