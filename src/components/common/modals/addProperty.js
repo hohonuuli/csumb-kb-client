@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Form, Radio } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap';
 import AlertComp from '../alertComp';
 
@@ -35,10 +35,8 @@ class AddProperty extends React.Component {
         headers: { 'Content-Type':'application/json' },
       }
 
-      var fetchString = 'http://localhost:4567/addLinkRealizations' + '?concept=' + this.props.conceptName + '&toConcept=self' + '&linkName='+ this.state.linkName
-      + '&linkValue=' + this.state.linkValue +
-      '&jwt=' + sessionStorage.getItem('access_token')
-      + "&userName=" + sessionStorage.getItem("access_username");
+      var fetchString = 'http://localhost:4567/addLinkRealization/' + this.props.conceptName + '?toConcept=self' + '&linkName='+ this.state.linkName
+      + '&linkValue=' + this.state.linkValue + '&userName=' + sessionStorage.getItem('access_username') + '&jwt=' + sessionStorage.getItem('access_token');
       fetch(fetchString, config)
         .then(response =>
           response.json().then(user => ({ user, response }))
@@ -75,9 +73,11 @@ class AddProperty extends React.Component {
   render() {
     return (
       <div>
+  
         <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
           Add property
         </Button>
+
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title style={{textTransform: "capitalize"}}>Add property: {this.props.conceptName}</Modal.Title>

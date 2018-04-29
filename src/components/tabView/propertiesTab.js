@@ -1,33 +1,12 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 
-import {Button, Checkbox, ButtonToolbar, MenuItem, DropdownButton } from 'react-bootstrap';
+import {Button, ButtonToolbar} from 'react-bootstrap';
 import AddProperty from '../common/modals/addProperty';
+import DeleteProperty from '../common/modals/deleteProperty';
 
 
 class PropTab extends Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.handleSelect = this.handleSelect.bind(this);
-    this.handleCheck = this.handleCheck.bind(this);
-
-    this.state = {
-      selectedProperty: '',
-      checked: false
-    };
-
-  }
-
-  handleSelect(eventKey){
-    this.setState({selectedProperty: eventKey});
-    console.log(eventKey)
-  }
-
-  handleCheck(){
-    this.setState({checked: true});
-    console.log("checked")
-  }
 
   render() {
     const { properties } = this.props;
@@ -44,7 +23,6 @@ class PropTab extends Component {
                 return (
                     <div style={{backgroundColor: "#f5f5f5", padding: "10px", marginBottom: "10px", borderRadius: "10px"}} key={count}>
                     <Form horizontal>
-                    <Checkbox onChange={this.handleCheck} inline>{'  '}</Checkbox>
                     <FormGroup controlId="formHorizontalUrl">
                        <Col componentClass={ControlLabel} sm={2}>
                        Link:
@@ -69,7 +47,9 @@ class PropTab extends Component {
                        <FormControl type="text" placeholder="" value={propertyItem.linkValue} readOnly/>
                        </Col>
                    </FormGroup>
-
+                   {this.props.isAuthenticated &&
+                    <DeleteProperty conceptName={this.props.conceptName} linkName={propertyItem.linkName} refreshConcept={this.props.refreshConcept}/>
+                  }
                </Form>
                     </div>
                 );
@@ -78,12 +58,14 @@ class PropTab extends Component {
     }
     return (
         <div>
+          {this.props.isAuthenticated &&
           <ButtonToolbar>
             <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
               Update
             </Button>
                <AddProperty conceptName={this.props.conceptName} properties={this.props.properties} refreshConcept={this.props.refreshConcept}/>
             </ButtonToolbar>
+          }
             {data}
         </div>
     );
