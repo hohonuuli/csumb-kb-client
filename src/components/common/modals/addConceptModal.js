@@ -21,7 +21,7 @@ class AddConceptModal extends React.Component {
 
   }
   handleClose() {
-    this.setState({ show: false });
+    this.setState({ show: false, error: '', alertStyle: ''});
   }
 
   handleShow() {
