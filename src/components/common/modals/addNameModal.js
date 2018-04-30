@@ -51,7 +51,7 @@ class AddNameModal extends React.Component {
                 this.handleClose()
               }, 3000);
           }
-        }).catch(err => this.setState({error: 'Unknown error: Try again', alertStyle: 'danger'}))
+        }).catch(err => console.log(err), this.setState({error: 'Unknown error: Try again', alertStyle: 'danger'}))
     }
   }
 
@@ -62,7 +62,7 @@ class AddNameModal extends React.Component {
   }
 
   handleClose() {
-    this.setState({ show: false });
+    this.setState({ show: false, error: '', alertStyle: ''});
   }
 
   handleShow() {

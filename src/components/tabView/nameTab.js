@@ -34,8 +34,10 @@ class NameTab extends Component {
                             marginBottom: "5px", borderRadius: "5px", height: "40px", 
                             width: "80%", margin: "5px auto"}} 
                             key={count}>
+                                <div style={{display: 'inline-block', width: '225px'}}>
                                 <span>Name: </span>
                                 <strong style={{marginRight: "40px"}}>{altItem.Name}</strong>
+                                </div>
                                 <span>Type: <strong>{altItem.Type}</strong></span>
                                 {this.props.isAuthenticated &&
                                     <UpdateConceptNameModal parentConcept={this.props.conceptName} conceptName={altItem.Name} refreshConcept={this.props.refreshConcept}/>
