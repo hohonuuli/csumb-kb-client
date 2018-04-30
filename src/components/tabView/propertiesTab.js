@@ -4,7 +4,7 @@ import { Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap'
 import {Button, ButtonToolbar} from 'react-bootstrap';
 import AddProperty from '../common/modals/addProperty';
 import DeleteProperty from '../common/modals/deleteProperty';
-
+import UpdateProperty from '../common/modals/updateProperty';
 
 class PropTab extends Component {
 
@@ -47,9 +47,15 @@ class PropTab extends Component {
                        <FormControl type="text" placeholder="" value={propertyItem.linkValue} readOnly/>
                        </Col>
                    </FormGroup>
+
                    {this.props.isAuthenticated &&
-                    <DeleteProperty conceptName={this.props.conceptName} linkName={propertyItem.linkName} refreshConcept={this.props.refreshConcept}/>
-                  }
+
+                   <ButtonToolbar>
+                      <DeleteProperty conceptName={this.props.conceptName} linkName={propertyItem.linkName} refreshConcept={this.props.refreshConcept}/>
+                      <UpdateProperty conceptName={this.props.conceptName} linkName={propertyItem.linkName} linkValue={propertyItem.linkValue} refreshConcept={this.props.refreshConcept}/>
+                    </ButtonToolbar>
+
+                   }
                </Form>
                     </div>
                 );

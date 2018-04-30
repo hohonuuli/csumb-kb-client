@@ -64,12 +64,10 @@ class DeleteProperty extends React.Component {
   render() {
     return (
       <div style={{paddingBottom: "40px"}}>
-        <Button bsStyle="danger" className="pull-right" bsSize="sm" onClick={this.handleShow}>
-          Delete
-        </Button>
-        <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
-          Update
-        </Button>
+      
+          <Button bsStyle="danger" className="pull-right" bsSize="sm" onClick={this.handleShow}>
+            Delete
+          </Button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
