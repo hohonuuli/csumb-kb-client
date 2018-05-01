@@ -37,7 +37,7 @@ class TabView extends Component {
           <NameTab conceptName={currentObject.name} alternates={currentObject.alternatives} isAuthenticated={this.props.isAuthenticated} refreshConcept={this.props.refreshConcept}/>
         </Tab>
         <Tab eventKey={2} title="Templates">
-          <TemplatesTab templates={currentObject.alternateNames} />
+          <TemplatesTab conceptName={currentObject.name} templates={currentObject.templates} refreshConcept={this.props.refreshConcept}/>
         </Tab>
         <Tab eventKey={3} title="Properties">
           <PropTab conceptName={currentObject.name} properties={currentObject.descriptors} />
