@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 
-import { Button, Form, Radio } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap';
 import AlertComp from '../alertComp';
 
 
-class UpdateMediaModal extends React.Component {
+class UpdateMediaModal extends Component {
     constructor(props, context) {
       super(props, context);
   
