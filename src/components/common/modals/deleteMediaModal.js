@@ -37,7 +37,7 @@ class DeleteMediaModal extends React.Component {
     var {refreshConcept} = this.props;
 
     let config = {
-    method: 'POST',
+    method: 'DELETE',
     headers: { 'Content-Type':'application/json' },
     }
 
