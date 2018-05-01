@@ -44,8 +44,8 @@ class ChangeParentModal extends React.Component {
         headers: { 'Content-Type':'application/json' },
       }
 
-      var fetchString = 'http://localhost:4567/changeParent' + "?newParent=" + this.state.parentName +
-      '&concept=' + this.props.conceptName + '&jwt=' + sessionStorage.getItem('access_token') + "&userName=" + sessionStorage.getItem("access_username");
+      var fetchString = 'http://localhost:4567/changeParent?newParent=' + this.state.parentName +
+      '&concept=' + this.props.conceptName + '&jwt=' + sessionStorage.getItem('access_token') + '&userName=' + sessionStorage.getItem("access_username");
 
       fetch(fetchString, config)
         .then(response =>
