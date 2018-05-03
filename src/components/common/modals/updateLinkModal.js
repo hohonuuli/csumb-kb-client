@@ -34,10 +34,11 @@ class UpdateLinkModal extends Component {
       method: 'POST',
       headers: { 'Content-Type':'application/json' },
     }
-    var fetchString = 'http://localhost:4567/updateLinkTemplate/' + encodeURIComponent((this.props.conceptName).trim()) +
+    var fetchString = 'http://localhost:4567/updateLinkTemplate/' + encodeURIComponent((this.state.linkFrom).trim()) +
     '?toConcept=' + this.state.linkTo + '&newLinkName=' + this.state.linkName + 
     '&linkValue=' + this.state.linkValue +'&oldLinkName=' + this.state.oldLinkName + 
     '&jwt=' + sessionStorage.getItem('access_token') + "&userName=" + sessionStorage.getItem("access_username");
+
     fetch(fetchString, config)
       .then(response =>
         response.json().then(user => ({ user, response }))
@@ -70,7 +71,7 @@ class UpdateLinkModal extends Component {
     this.setState({ 
       show: true, 
       oldLinkName: this.props.templateItem.linkName,
-      linkFrom: this.props.templateItem.linkFrom,
+      linkFrom: 'self',
       linkTo: this.props.templateItem.toConcept,
       linkName: this.props.templateItem.linkName,
       linkValue: this.props.templateItem.linkValue,
@@ -101,7 +102,7 @@ class UpdateLinkModal extends Component {
               From:
               </Col>
               <Col sm={10}>
-                  <FormControl type="text" placeholder="" value={this.props.conceptName} onChange={this.handleChange}/>
+                  <FormControl type="text" placeholder="" value={this.state.linkFrom} onChange={this.handleChange}/>
               </Col>
           </FormGroup>
           <FormGroup controlId="linkName">

@@ -17,6 +17,7 @@ class DeleteLinkModal extends React.Component {
       conceptName: '',
       error: '',
       alertStyle: '',
+      showAlert: false,
     };
 
   }
@@ -51,11 +52,11 @@ class DeleteLinkModal extends React.Component {
         response.json().then(user => ({ user, response }))
             ).then(({ user, response }) =>  {
         if (!response.ok) {
-        this.setState({error: user.message, alertStyle: 'danger'});
+        this.setState({error: user.message, alertStyle: 'danger', showAlert: true});
         } else if(user.code === "401") {
-            this.setState({error: user.message, alertStyle: 'danger'});
+            this.setState({error: user.message, alertStyle: 'danger', showAlert: true});
         } else {
-            this.setState({error: "Link template deleted", alertStyle: 'success'});
+            this.setState({error: "Link template deleted", alertStyle: 'success', showAlert: true});
             refreshConcept(this.props.conceptName);
             setTimeout(() => {
                 this.handleClose()
@@ -65,7 +66,6 @@ class DeleteLinkModal extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <Button bsStyle="danger" className="pull-right" bsSize="sm" onClick={this.handleShow}>
@@ -77,7 +77,7 @@ class DeleteLinkModal extends React.Component {
             <Modal.Title>Delete Link?</Modal.Title>
           </Modal.Header>
           {this.state.error &&
-            <AlertComp show={true} bsStyle={this.state.alertStyle} message={this.state.error}/>
+            <AlertComp show={this.state.showAlert} bsStyle={this.state.alertStyle} message={this.state.error}/>
           }
           <Modal.Footer>
             <Button onClick={this.handleClose}>No</Button>
