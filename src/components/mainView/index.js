@@ -20,7 +20,7 @@ class MainView extends Component {
   render() {
     return (
       <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-        <h1 className="page-header" style={{textAlign: "center"}}>Knowledgebase Dashboard</h1>
+        <h2 className="page-header" style={{textAlign: "center"}}>Knowledgebase Dashboard</h2>
         <TabView />
       </div>
 

@@ -24,7 +24,7 @@ class AlertComp extends Component {
   componentWillUnmount(){
     this.setState({show: false, error: ''})
   }
-  componentWillMount(){
+  componentDidMount(){
     setTimeout(this.handleDismiss, 2000);
   }
   render() {
