@@ -3,14 +3,13 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import { refreshConcept } from '../../actions/index';
-import { Tabs, Tab } from 'react-bootstrap';
+import { Tabs, Tab, Button } from 'react-bootstrap';
 import MediaTab from './mediaTab';
 import HistoryTab from './historyTab';
 import PropTab from './propertiesTab';
 import NameTab from './nameTab';
 import TemplatesTab from './templatesTab';
 import AddName from '../common/modals/addNameModal';
-import { Button, ButtonToolbar } from 'react-bootstrap';
 
 class TabView extends Component {
   constructor(props, context) {
@@ -42,7 +41,7 @@ class TabView extends Component {
         <Tab eventKey={1} title="Names">
             {this.props.isAuthenticated &&
               <div>
-            
+
                   <Button className="pull-right" bsStyle="primary" bsSize="sm">Update</Button>
                   <AddName conceptName={currentObject.name}/>
 

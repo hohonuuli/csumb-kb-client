@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 
-import {Button, ButtonToolbar} from 'react-bootstrap';
+import { ButtonToolbar} from 'react-bootstrap';
 import AddProperty from '../common/modals/addProperty';
 import DeleteProperty from '../common/modals/deleteProperty';
 import UpdateProperty from '../common/modals/updateProperty';

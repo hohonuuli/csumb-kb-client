@@ -9,7 +9,7 @@ import './mainView.css';
 
 import TabView from '../tabView';
 import ConceptModal from '../common/modals/conceptModal';
-import AddName from '../common/modals/addNameModal';
+
 
 class MainView extends Component {
   constructor(props, context) {

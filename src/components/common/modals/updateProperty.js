@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, ButtonToolbar, Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap';
 import AlertComp from '../alertComp';
 

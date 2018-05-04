@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Modal, Button, ButtonToolbar } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import AlertComp from '../alertComp';
 
 class DeleteProperty extends React.Component {
