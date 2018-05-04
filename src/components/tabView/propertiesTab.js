@@ -50,9 +50,9 @@ class PropTab extends Component {
 
                    {this.props.isAuthenticated &&
 
-                   <ButtonToolbar>
+                    <ButtonToolbar>
                       <DeleteProperty conceptName={this.props.conceptName} linkName={propertyItem.linkName} refreshConcept={this.props.refreshConcept}/>
-                      <UpdateProperty conceptName={this.props.conceptName} linkName={propertyItem.linkName} linkValue={propertyItem.linkValue} refreshConcept={this.props.refreshConcept}/>
+                      <UpdateProperty conceptName={this.props.conceptName} toConcept={propertyItem.toConcept} linkName={propertyItem.linkName} linkValue={propertyItem.linkValue} refreshConcept={this.props.refreshConcept}/>
                     </ButtonToolbar>
 
                    }

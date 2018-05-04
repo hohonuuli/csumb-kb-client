@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, ButtonToolbar } from 'react-bootstrap';
 import AlertComp from '../alertComp';
 
 class DeleteProperty extends React.Component {
@@ -63,11 +63,10 @@ class DeleteProperty extends React.Component {
 
   render() {
     return (
-      <div style={{paddingBottom: "40px"}}>
-      
-          <Button bsStyle="danger" className="pull-right" bsSize="sm" onClick={this.handleShow}>
-            Delete
-          </Button>
+      <div>
+            <Button bsStyle="danger" bsSize="sm" className="pull-right" onClick={this.handleShow}>
+              Delete
+            </Button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>

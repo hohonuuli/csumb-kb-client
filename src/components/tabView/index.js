@@ -42,10 +42,10 @@ class TabView extends Component {
         <Tab eventKey={1} title="Names">
             {this.props.isAuthenticated &&
               <div>
-                <ButtonToolbar>
+            
                   <Button className="pull-right" bsStyle="primary" bsSize="sm">Update</Button>
                   <AddName conceptName={currentObject.name}/>
-                </ButtonToolbar>
+
               </div>
             }
           <h3 style={{textTransform: "capitalize"}}>{currentObject.name}</h3>

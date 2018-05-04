@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Form } from 'react-bootstrap';
+import { Button, ButtonToolbar, Form } from 'react-bootstrap';
 import { FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap';
 import AlertComp from '../alertComp';
 
@@ -35,7 +35,7 @@ class UpdateProperty extends React.Component {
         headers: { 'Content-Type':'application/json' },
       }
 
-      var fetchString = 'http://localhost:4567/updateLinkRealization/' + this.props.conceptName + '?toConcept=self' + '&linkName='+ this.state.linkName
+      var fetchString = 'http://localhost:4567/updateLinkRealization/' + this.props.conceptName + '?toConcept=' + this.state.toConcept + '&linkName='+ this.state.linkName
       + '&linkValue=' + this.state.linkValue + '&userName=' + sessionStorage.getItem('access_username') + '&jwt=' + sessionStorage.getItem('access_token');
       fetch(fetchString, config)
         .then(response =>
@@ -73,10 +73,9 @@ class UpdateProperty extends React.Component {
   render() {
     return (
       <div>
-
-        <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
-          Update
-        </Button>
+            <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
+              Update
+            </Button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
@@ -94,7 +93,7 @@ class UpdateProperty extends React.Component {
                 </FormGroup>
                 <FormGroup controlId="toConcept" >
                     <ControlLabel>To: </ControlLabel>
-                    <FormControl type="text" name="toConcept" placeholder="self" onChange={this.handleChange} readOnly/>
+                    <FormControl type="text" name="toConcept" placeholder={this.props.toConcept} onChange={this.handleChange} />
                 </FormGroup>
                 <FormGroup controlId="linkValue" >
                     <ControlLabel>Value: </ControlLabel>
