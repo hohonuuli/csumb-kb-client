@@ -35,8 +35,9 @@ class UpdateProperty extends React.Component {
         headers: { 'Content-Type':'application/json' },
       }
 
-      var fetchString = 'http://localhost:4567/updateLinkRealization/' + this.props.conceptName + '?toConcept=' + this.state.toConcept + '&linkName='+ this.state.linkName
-      + '&linkValue=' + this.state.linkValue + '&userName=' + sessionStorage.getItem('access_username') + '&jwt=' + sessionStorage.getItem('access_token');
+      var fetchString = 'http://localhost:4567/updateLinkRealization' + '?concept=' + this.props.conceptName + '&newToConcept=' + this.state.toConcept + '&newLinkName='+ this.state.linkName +
+      '&newLinkValue=' + this.state.linkValue + '&oldLinkName=' + this.props.linkName + '&oldToConcept=' + this.props.toConcept +
+      '&oldLinkValue=' + this.props.linkValue + '&userName=' + sessionStorage.getItem('access_username') + '&jwt=' + sessionStorage.getItem('access_token');
       fetch(fetchString, config)
         .then(response =>
           response.json().then(user => ({ user, response }))
