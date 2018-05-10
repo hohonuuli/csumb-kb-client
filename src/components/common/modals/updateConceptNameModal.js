@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import { Button, Form, Radio } from 'react-bootstrap';
 import { FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap';
 import AlertComp from '../alertComp';
 
 
-class AddNameModal extends React.Component {
+class UpdateConceptNameModal extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -19,6 +19,7 @@ class AddNameModal extends React.Component {
         type: '',
         error: '',
         alertStyle: '',
+        showAlert: ''
     };
 
   }
@@ -28,30 +29,32 @@ class AddNameModal extends React.Component {
     var {refreshConcept} = this.props;
     if(this.state.newName === ''){
       this.setState({error: "Empty fields", alertStyle: 'danger'});
+    }else if(this.state.newName === this.props.conceptName){
+        console.log('same')
     }else{
       let config = {
         method: 'POST',
         headers: { 'Content-Type':'application/json' },
       }
-      var fetchString = 'http://localhost:4567/addConceptName/' + this.props.conceptName +
-      '?type=' + this.state.type + '&conceptName=' + this.state.newName + '&jwt=' + sessionStorage.getItem('access_token')
+      var fetchString = 'http://localhost:4567/updateConceptName/' + encodeURIComponent((this.props.conceptName).trim()) +
+      '?type=' + this.state.type + '&newConceptName=' + this.state.newName + '&jwt=' + sessionStorage.getItem('access_token')
       + "&userName=" + sessionStorage.getItem("access_username");
       fetch(fetchString, config)
         .then(response =>
           response.json().then(user => ({ user, response }))
               ).then(({ user, response }) =>  {
           if (!response.ok) {
-            this.setState({error: user.message, alertStyle: 'danger'});
+            this.setState({error: user.message, alertStyle: 'danger', showAlert: true});
           } else if(user.code === "401") {
-              this.setState({error: user.message, alertStyle: 'danger'});
+              this.setState({error: user.message, alertStyle: 'danger', showAlert: true});
           } else {
-              this.setState({error: "Name was added.", alertStyle: 'success'});
-              refreshConcept(this.props.conceptName);
+              this.setState({error: "Name was updated.", alertStyle: 'success', showAlert: true});
+              refreshConcept(this.props.parentConcept);
               setTimeout(() => {
                 this.handleClose()
               }, 3000);
           }
-        }).catch(err => console.log(err), this.setState({error: 'Unknown error: Try again', alertStyle: 'danger'}))
+        }).catch(err => this.setState({error: 'Unknown error: Try again', alertStyle: 'danger'}))
     }
   }
 
@@ -62,27 +65,28 @@ class AddNameModal extends React.Component {
   }
 
   handleClose() {
-    this.setState({ show: false, error: '', alertStyle: ''});
+    this.setState({ show: false, showAlert: false });
   }
 
   handleShow() {
     this.setState({ show: true });
   }
+
   componentWillUnmount(){
-    this.setState({error: '', alertStyle: ''})
+    this.setState({error: '', alertStyle: '', showAlert: false})
   }
   render() {
     return (
-      <div>
-        <Button bsStyle="primary" className="pull-left" bsSize="sm" onClick={this.handleShow}>
-          Add Name
+      <div style={{display: 'contents'}}>
+        <Button bsStyle="primary" className="pull-right" bsSize="sm" onClick={this.handleShow}>
+          Update
         </Button>
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title style={{textTransform: "capitalize"}}>{this.props.conceptName}</Modal.Title>
+            <Modal.Title style={{textTransform: "capitalize"}}>Update name: {this.props.conceptName}</Modal.Title>
           </Modal.Header>
             {this.state.error &&
-                <AlertComp show={true} bsStyle={this.state.alertStyle} message={this.state.error}/>
+                <AlertComp show={this.state.showAlert} bsStyle={this.state.alertStyle} message={this.state.error}/>
             }
           <Modal.Body style={{padding: "0 30px 0 30px"}}>
 
@@ -92,7 +96,7 @@ class AddNameModal extends React.Component {
                     <FormControl type="text" name="newName" placeholder="Name" onChange={this.handleChange} />
                 </FormGroup>
                 <FormGroup>
-                  <ControlLabel style={{paddingRight: '5px'}}>Type:    </ControlLabel>
+                  <ControlLabel style={{paddingRight: '5px'}}>Type:</ControlLabel>
                   <Radio id="type" value="Common" checked={this.state.type === "Common"}  onChange={this.handleChange} inline>Common</Radio>
                   <Radio id="type" value="Synonym" checked={this.state.type === "Synonym"} onChange={this.handleChange} inline>Synonym</Radio>
                   <Radio id="type" value="Former" checked={this.state.type === "Former"} onChange={this.handleChange} inline>Former</Radio>
@@ -101,7 +105,7 @@ class AddNameModal extends React.Component {
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Close</Button>
-            <Button bsStyle="primary" onClick={this.handleSubmit}>Add name</Button>
+            <Button bsStyle="primary" onClick={this.handleSubmit}>Update name</Button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -109,4 +113,4 @@ class AddNameModal extends React.Component {
   }
 }
 
-export default AddNameModal;
+export default UpdateConceptNameModal;
